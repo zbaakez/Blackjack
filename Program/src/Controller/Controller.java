@@ -94,8 +94,6 @@ public class Controller {
         else if(clickedButton.equals(btnStartGame) && (Data.valueMap.get("openStages") == 1 || Data.valueMap.get("openstages") == 6)){
             //first login window for player pops out
             model.handleLoginWindow(0);
-            //game will start now
-            model.startGameBtnClicked();
         }
         //call method that will open Spieleranzahl window
         else if(clickedButton.equals(btnSpieleranzahl) && Data.valueMap.get("openStages") == 1)
@@ -224,7 +222,7 @@ public class Controller {
      * @param evt
      * @throws IOException
      */
-    public void loginWindowBtnClicked(ActionEvent evt) throws IOException {
+    public void loginWindowBtnClicked(ActionEvent evt) throws Exception {
 
         //password for encrypting and decrypting
         String key = "iMtheEncrypter!1";
@@ -455,9 +453,9 @@ public class Controller {
             worked=true;
         }
 
+        int spieler = Integer.parseInt(lblSpielerLogin.getText().replaceAll("\\D+", ""));
         if(worked) {
             Data.valueMap.put("openStages", 1);
-            int spieler = Integer.parseInt(lblSpielerLogin.getText().replaceAll("\\D+", ""));
             if(Data.valueMap.get("spieler") > spieler)
                 model.handleLoginWindow(spieler);
         }
@@ -465,6 +463,8 @@ public class Controller {
         if(worked) {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close(); //Stage szene gets closed after button is clicked
+	    if(Data.valueMap.get("spieler") == spieler) // all players logged in, game can be started
+                model.startGameBtnClicked();
         }
     }
 

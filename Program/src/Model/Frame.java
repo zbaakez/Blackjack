@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Frame  extends JFrame {
-    Field field = new Field(this, 0);
+    Field field = new Field(this, Data.valueMap.get("szene"));
     int turn =0;
     private Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 

@@ -33,16 +33,16 @@ public class Field extends Canvas {
     public Field(Frame frame, int scene){
         this.frame = frame;
         try {
-            if(scene==0){
+            if(scene==1){
                 background = ImageIO.read(new File("casino.png"));
-            }
-            else if(scene==1){
-                background = ImageIO.read(new File("beach.png"));
             }
             else if(scene==2){
                 background = ImageIO.read(new File("tirol.png"));
             }
             else if(scene==3){
+                background = ImageIO.read(new File("beach.png"));
+            }
+            else if(scene==4){
                 background = ImageIO.read(new File("space.png"));
             }
         } catch (IOException e) {
