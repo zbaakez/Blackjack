@@ -1,0 +1,22 @@
+.root {
+    -fx-background-image: url("../pictures/blackjackgreen.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
+}
+.slider {
+    -fx-font-size: 25;
+    -fx-border-color: darkgreen;
+}
+.label {
+    -fx-text-fill: yellow;
+    -fx-opacity: 0.8;
+}
+.button {
+    -fx-background-color: yellow;
+    -fx-opacity: 0.8;
+    -fx-font-family: "Bodoni MT Black";
+}
+.button:hover {
+    -fx-background-color: orange;
+    -fx-opacity: 0.8;
+}
