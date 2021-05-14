@@ -15,7 +15,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.File;
 import java.util.Objects;
 
 /**
@@ -55,23 +54,23 @@ public class BlackjackMainMenu extends Application  {
         primaryStage.show();
 
         //close all windows if X in titlebar is clicked
-        primaryStage.setOnCloseRequest(windowEvent -> {
+       /* primaryStage.setOnCloseRequest(windowEvent -> {
             File decrypted = new File("resources/datadecrypted.csv");
             if(decrypted.exists())
                 decrypted.delete();
             System.exit(0);
-        });
+        });*/
 
         nextSong();
 
     }
 
     /**
-     * Method with Timeline that checks if a song is playing every 2 seconds
+     * Method with Timeline that checks if a song is playing every second
      * if no song is playing a new one starts
      */
     private void nextSong(){
-        timeline = new Timeline(new KeyFrame(Duration.seconds(2), new EventHandler<ActionEvent>() {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if(!Music.audioPlayer.isPlaying())

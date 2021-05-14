@@ -70,14 +70,23 @@ public class Frame  extends JFrame {
 
     //Textfields
     public void setButtons(){
-        Button hit = new Button("Hit");
-        Button stand = new Button("Stand");
-        Button split = new Button("Split");
-        Button dble = new Button("double");
-        hit.setBounds(field.scaleX(993), field.scaleY(1050), 35, 35);
-        stand.setBounds(field.scaleX(1033), field.scaleY(1050), 35, 35);
-        split.setBounds(field.scaleX(1073), field.scaleY(1050), 35, 35);
-        dble.setBounds(field.scaleX(1113), field.scaleY(1050), 35, 35);
+        JButton hit = new JButton("Hit");
+        JButton stand = new JButton("Stand");
+        JButton split = new JButton("Split");
+        JButton dble = new JButton("double");
+        hit.setBounds(field.scaleX(993), field.scaleY(1050), 100, 100);
+        stand.setBounds(field.scaleX(1033), field.scaleY(1050), 100, 100);
+        split.setBounds(field.scaleX(1073), field.scaleY(1050), 100, 100);
+        dble.setBounds(field.scaleX(1113), field.scaleY(1050), 100, 100);
+        ImageIcon img = new ImageIcon("hitbtn.png");
+        Image ic = img.getImage() ;
+        Image newimg = ic.getScaledInstance( 100, 100,  java.awt.Image.SCALE_SMOOTH ) ;
+        hit.setIcon(new javax.swing.ImageIcon(newimg));
+        stand.setIcon(new javax.swing.ImageIcon("Program/PNG/btnstand.png"));
+        split.setIcon(new javax.swing.ImageIcon("Program/PNG/btnSPlit.png"));
+        dble.setIcon(new javax.swing.ImageIcon("Program/PNG/btndouble.png"));
+
+
         this.add(hit);
         this.add(stand);
         this.add(dble);
