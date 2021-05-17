@@ -24,6 +24,8 @@ public class Chips extends JFrame {
     JButton allin=new JButton("ALL IN");
     JButton reduce=new JButton("REDUCE");
 
+    JLabel player;
+
     final int ICONSIZE=200;
     private int bet=0;
     private ArrayList<Integer> betlist=new ArrayList<>();
@@ -33,25 +35,32 @@ public class Chips extends JFrame {
     int betset=0;
 
     ArrayList<JButton> btnlist=new ArrayList<>();
-    String spieler;
+    String playername;
     int screenHeight = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height;
     Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
     int whichPlayer;
     Color colorPanel=new Color(2, 102, 47);
     Timer t1;
 
-    public Chips(String spieler, int whichPlayer){
-        this.spieler=spieler;
-        System.out.println(spieler);
+    public Chips(String playername, int whichPlayer){
+        this.playername=playername;
         this.whichPlayer = whichPlayer;
 
-        setSize(ICONSIZE*3,ICONSIZE*2+80);
-        setLocation(0,(int)screenHeight-ICONSIZE*2-80);
+        setSize(ICONSIZE*3,ICONSIZE*3);
+        setLocation(0,(int)screenHeight-ICONSIZE*3);
 
         panel.setLayout(null);
         setIconPaths();
 
         panel.setBackground(colorPanel);
+
+        player=new JLabel(playername,SwingConstants.CENTER);
+        player.setText(playername);
+        player.setBounds(ICONSIZE*3/4,ICONSIZE*5/2,ICONSIZE*3/2,ICONSIZE/3);
+        player.setFont(new Font("Comic Sans",Font.BOLD,25));
+        player.setBorder(BorderFactory.createLineBorder(new Color(0, 54, 18),5));
+        player.setForeground(Color.BLACK);
+        panel.add(player);
 
         btnlist.add(btn1);
         btnlist.add(btn2);
