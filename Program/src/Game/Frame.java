@@ -3,6 +3,7 @@ package Game;
 import Game.BlackJack;
 import Model.Data;
 import Model.Spieler;
+import chips.Chips;
 import org.w3c.dom.Text;
 
 import javax.imageio.ImageIO;
@@ -39,6 +40,12 @@ public class Frame  extends JFrame {
         field.setBounds(0, 0, (int) size.getWidth(), (int) size.getHeight());
         this.setVisible(true);
         field.start();
+
+        //now get the bet of all players!
+        Chips[] chips = new Chips[Data.valueMap.get("spieler")];
+        for(int i = chips.length-1; i>=0; i--){
+            chips[i] = new Chips(Data.spielerMap.get(i).getSpielername());
+        }
     }
 
     public void startGame() {
