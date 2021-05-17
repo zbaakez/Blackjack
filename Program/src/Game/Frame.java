@@ -4,10 +4,15 @@ import Game.BlackJack;
 import Model.Data;
 import org.w3c.dom.Text;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class Frame  extends JFrame {
@@ -20,7 +25,7 @@ public class Frame  extends JFrame {
 
     //public Frame(int players, int scene) throws InterruptedException {
 
-    public Frame() throws InterruptedException {
+    public Frame() throws InterruptedException, IOException {
         //this.scene=scene;
         //this.player=players;
         this.setLayout(null);
@@ -68,46 +73,70 @@ public class Frame  extends JFrame {
     }
 
 
-    public void setButtons() {
-        Button hit = new Button("Hit");
-        Button stand = new Button("Stand");
-        Button split = new Button("Split");
-        Button dble = new Button("double");
-        hit.setBounds(field.scaleX(993), field.scaleY(1050), 35, 35);
-        stand.setBounds(field.scaleX(1033), field.scaleY(1050), 35, 35);
-        split.setBounds(field.scaleX(1073), field.scaleY(1050), 35, 35);
-        dble.setBounds(field.scaleX(1113), field.scaleY(1050), 35, 35);
+    public void setButtons() throws IOException {
+        JButton hit = new JButton("Hit");
+        JButton stand = new JButton("Stand");
+        JButton split = new JButton("Split");
+        JButton dble = new JButton("Double");
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int)size.getWidth();
+        int height = (int)size.getHeight();
+        System.out.println(width + " " + height);
+        hit.setBounds((int) Math.round(width - (width*0.92)) , (int) Math.round(height - (height*0.65)), 200, 100);
+        stand.setBounds(hit.getX() + 300 , (int) Math.round(height - (height*0.65)), 200, 100);
+        split.setBounds((int) Math.round((width*0.92) - 200) , (int) Math.round(height - (height*0.65)), 200, 100);
+        dble.setBounds((int) Math.round((width*0.92) - 500) , (int) Math.round(height - (height*0.65)), 200, 100);
+
+        setJButtons(hit);
+        setJButtons(stand);
+        setJButtons(split);
+        setJButtons(dble);
+
         this.add(hit);
         this.add(stand);
         this.add(dble);
         this.add(split);
 
-
         hit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                handleButtonAction(hit.getLabel());
+                handleButtonAction("Hit");
             }
         });
         stand.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                handleButtonAction(stand.getLabel());
+                handleButtonAction("Stand");
             }
         });
         split.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                handleButtonAction(split.getLabel());
+                handleButtonAction("Split");
             }
         });
         dble.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                handleButtonAction(dble.getLabel());
+                handleButtonAction("Double");
             }
         });
 
+    }
+
+    public void setJButtons(JButton bt){
+        bt.setBackground(Color.YELLOW);
+        bt.setForeground(Color.BLACK);
+        bt.setFocusPainted(false);
+        bt.setFont(new Font("BODONI MT BLACK", Font.BOLD, 40));
+        bt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bt.setBackground(Color.RED);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bt.setBackground(Color.YELLOW);
+            }
+        });
     }
 
     public void handleButtonAction(String button) {
