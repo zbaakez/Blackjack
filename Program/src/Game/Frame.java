@@ -43,9 +43,8 @@ public class Frame  extends JFrame {
 
         //now get the bet of all players!
         Chips[] chips = new Chips[Data.valueMap.get("spieler")];
-        Data.valueMap.put("openStages", 2);
         for(int i = chips.length-1; i>=0; i--){
-            chips[i] = new Chips(Data.spielerMap.get(i).getSpielername(), i);
+            chips[i] = new Chips(Data.spielerMap.get(i).getSpielername());
         }
     }
 
@@ -88,10 +87,6 @@ public class Frame  extends JFrame {
 
     public void setValueToTextfields(int turn) {
         for (int i = 0; i < field.getBlackjack().getPlayers().length; i++) {
-            if(Data.betMap.get(i) != null)
-                textfieldsWager[i].setText(String.valueOf(Data.betMap.get(i)));
-            else
-                textfieldsWager[i].setText("0");
             textfieldsPoints[i].setText(String.valueOf(field.getBlackjack().getValue(field.getBlackjack().getPlayers()[i])));
             if(i==turn) {
                 textfieldsPoints[i].setBackground(Color.RED);
@@ -135,29 +130,25 @@ public class Frame  extends JFrame {
         hit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Data.valueMap.get("openStages")==1)
-                    handleButtonAction("Hit");
+                handleButtonAction("Hit");
             }
         });
         stand.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Data.valueMap.get("openStages")==1)
-                    handleButtonAction("Stand");
+                handleButtonAction("Stand");
             }
         });
         split.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Data.valueMap.get("openStages")==1)
-                    handleButtonAction("Split");
+                handleButtonAction("Split");
             }
         });
         dble.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Data.valueMap.get("openStages")==1)
-                    handleButtonAction("Double");
+                handleButtonAction("Double");
             }
         });
 
