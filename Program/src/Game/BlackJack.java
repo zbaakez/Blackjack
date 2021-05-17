@@ -45,7 +45,7 @@ public class BlackJack {
     public void action(Action action){
         if(action==Action.HIT){
             players[turnPlayer].addCard(deck.draw());
-            if(getValue(players[turnPlayer])>21){
+            if(getValue(players[turnPlayer])>=21){
                 notStanding.remove(players[turnPlayer]);
             }
             if(nextTurnPlayer()==false){
