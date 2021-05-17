@@ -1,8 +1,10 @@
-package Model;
+package Game;
 
 import Game.BlackJack;
 import Game.Card;
+import Game.CardImages;
 import Game.Player;
+import Model.Data;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -12,11 +14,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class Field extends Canvas {
-
-    private int count=0;
-
+    private int players;
     private CardImages cardImages = new CardImages();
-    private BlackJack blackjack = new BlackJack(5);
+    private BlackJack blackjack = new BlackJack(Data.valueMap.get("spieler")+Data.valueMap.get("bot"));
 
     private Frame frame;
     private int value = 0;
@@ -61,6 +61,7 @@ public class Field extends Canvas {
                 }
                 Graphics g = bs.getDrawGraphics();
                 draw(g);
+                uiUpdate();
                 g.dispose();
                 bs.show();
                 try {
@@ -79,17 +80,22 @@ public class Field extends Canvas {
         for(int i=0;i<blackjack.getPlayers().length;i++){
             int count=0;
             Player p = blackjack.getPlayers()[i];
-            for(Card card : p.getHand()){
-                drawCard(getXPos(p.getId())+count, getYPos(p.getId()), card, g);
+            for (int j=0;j<p.getHand().size();j++){
+                drawCard(getXPos(p.getId())+count, getYPos(p.getId()), p.getHand().get(j), g);
                 count+=40;
             }
         }
+        int count=0;
         int x = (int) originalWidth;
-        for(Card card : blackjack.getDealer().getHand()){
-            drawCard(x/2, 100, card, g);
+        for (int j=0;j<blackjack.getDealer().getHand().size();j++){
+            drawCard(x/2+count, 100, blackjack.getDealer().getHand().get(j), g);
+            count+=40;
         }
     }
 
+    public void uiUpdate(){
+            frame.setValueToTextfields();
+    }
 
     public void drawCard(int x, int y, Card card, Graphics g){
         BufferedImage img = cardToImage(card);
@@ -152,6 +158,7 @@ public class Field extends Canvas {
     }
 
     public int getCardPosition() {
+
 
         return 0;
     }

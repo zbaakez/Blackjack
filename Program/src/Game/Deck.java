@@ -17,16 +17,9 @@ public class Deck {
             }
         }
     }
-
     public Card draw(){
         Card card = cards.get(0);
         cards.remove(0);
         return card;
     }
-
-
-
-
-
-
 }

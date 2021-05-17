@@ -3,6 +3,7 @@ package Model;
 import View.View;
 
 import java.io.IOException;
+import Game.*;
 
 /**
  * Model class is used to handle and pass on actions
@@ -26,7 +27,7 @@ public class Model {
      */
     public void startGameBtnClicked() throws Exception {
         //Object of game with object(Data.valueMap(), Data.spielerMap);
-        MainGUI.main();
+        Game.MainGUI.main();
         System.out.println(Data.hashMapToString());
     }
 

@@ -1,5 +1,6 @@
 package View;
 
+import Model.Data;
 import Model.Music;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -15,6 +16,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.util.Objects;
 
 /**
@@ -30,11 +32,12 @@ public class BlackjackMainMenu extends Application  {
     private Timeline timeline;
 
     public static Parent root;
-    @Override
+
     /**
      * Method that opens MainMenu with corresponding attributes
      * Program is started here
      */
+    @Override
     public void start(Stage primaryStage) throws Exception{
 
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../View/mainMenu.fxml")));
@@ -54,12 +57,12 @@ public class BlackjackMainMenu extends Application  {
         primaryStage.show();
 
         //close all windows if X in titlebar is clicked
-       /* primaryStage.setOnCloseRequest(windowEvent -> {
+        primaryStage.setOnCloseRequest(windowEvent -> {
             File decrypted = new File("resources/datadecrypted.csv");
             if(decrypted.exists())
                 decrypted.delete();
             System.exit(0);
-        });*/
+        });
 
         nextSong();
 
@@ -73,8 +76,9 @@ public class BlackjackMainMenu extends Application  {
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if(!Music.audioPlayer.isPlaying())
-                    Music.playMusic();
+                if(Data.valueMap.get("sound") == 1)
+                    if(!Music.audioPlayer.isPlaying())
+                        Music.playMusic();
             }
         }));
         timeline.setCycleCount(Animation.INDEFINITE);

@@ -39,13 +39,15 @@ public class Music {
      */
     public static void playMusic() {
 
-        String audioPath = musicHandler();
-        assert audioPath != null;
-        Media hit = new Media(Paths.get(audioPath).toUri().toString());
+        if(Data.valueMap.get("sound") == 1) {
+            String audioPath = musicHandler();
+            assert audioPath != null;
+            Media hit = new Media(Paths.get(audioPath).toUri().toString());
 
-        audioPlayer = new AudioClip(hit.getSource());
-        audioPlayer.setVolume(0.021);
-        audioPlayer.play();
+            audioPlayer = new AudioClip(hit.getSource());
+            audioPlayer.setVolume(0.021);
+            audioPlayer.play();
+        }
 
     }
 

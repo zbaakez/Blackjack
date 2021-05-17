@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.*;
+import Model.Model.*;
 import View.BlackjackMainMenu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +24,7 @@ public class Controller {
     @FXML
     private Button btnMute, btnStartGame, btnSpieleranzahl, btnBotanzahl, btnSzene, btnRegeln, btnExit;
 
-    private final Model model = new Model();
+    private final Model.Model model = new Model.Model();
 
     Scene mainMenuScene;
     @FXML private Slider sliderSpieler, sliderBot;
@@ -37,23 +37,23 @@ public class Controller {
      */
     public void initialize() throws MalformedURLException {
 
-        if(!Data.getInit()) {
-            if (!Data.getInitInputValueMap()) {// set values of hashmap
-                Data.valueMap.put("init", 1); //hashmap has been initialized
-                Data.valueMap.put("sound", 1); //sound on
-                Data.valueMap.put("spieler", 1); //spieleranzahl
-                Data.valueMap.put("bot", 0); //botanzahl
-                Data.valueMap.put("szene", 1); // 1 == Standard, 2 == Tirol, 3 == Strand, 4 == Normaler Tisch
-                Data.valueMap.put("openStages", 1);
+        if(!Model.Data.getInit()) {
+            if (!Model.Data.getInitInputValueMap()) {// set values of hashmap
+                Model.Data.valueMap.put("init", 1); //hashmap has been initialized
+                Model.Data.valueMap.put("sound", 1); //sound on
+                Model.Data.valueMap.put("spieler", 1); //spieleranzahl
+                Model.Data.valueMap.put("bot", 0); //botanzahl
+                Model.Data.valueMap.put("szene", 1); // 1 == Standard, 2 == Tirol, 3 == Strand, 4 == Normaler Tisch
+                Model.Data.valueMap.put("openStages", 1);
                 //1 Main Menu, 2 Main Menu and Spieleranzahl, 3 Main Menu and Botanzahl, 4 Main Menu and Szene, 5 Main Menu and Rules, 6 Login Windows, 7 Leaderboard
             }
-            Data.setInit(true); //set init to true
-            Music.playMusic();
+            Model.Data.setInit(true); //set init to true
+            Model.Music.playMusic();
         }
-        if(Data.valueMap.get("openStages") == 2) //handles Spieleranzahlwindow
-                sliderSpieler.setValue(Data.valueMap.get("spieler"));
-        if(Data.valueMap.get("openStages") == 3) //handles Botanzahlwindow
-                sliderBot.setValue(Data.valueMap.get("bot"));
+        if(Model.Data.valueMap.get("openStages") == 2) //handles Spieleranzahlwindow
+                sliderSpieler.setValue(Model.Data.valueMap.get("spieler"));
+        if(Model.Data.valueMap.get("openStages") == 3) //handles Botanzahlwindow
+                sliderBot.setValue(Model.Data.valueMap.get("bot"));
 
     }
 
@@ -70,15 +70,15 @@ public class Controller {
 
         //handle Button btnMute (mutes and unmutes music)
         if (clickedButton.equals(btnMute)){
-            if(Data.valueMap.get("sound") == 1) {
+            if(Model.Data.valueMap.get("sound") == 1) {
                 btnMute.setStyle("-fx-background-image: url('/pictures/soundoff.jpg')");
-                Data.valueMap.put("sound", 0);
-                Music.stopMusic();
+                Model.Data.valueMap.put("sound", 0);
+                Model.Music.stopMusic();
             }
-            else if(Data.valueMap.get("sound") == 0) {
+            else if(Model.Data.valueMap.get("sound") == 0) {
                 btnMute.setStyle("-fx-background-image: url('/pictures/soundon.jpg')");
-                Data.valueMap.put("sound", 1);
-                Music.resumeMusic();
+                Model.Data.valueMap.put("sound", 1);
+                Model.Music.resumeMusic();
             }
         }
         //handle btnExit, exits the program
@@ -91,21 +91,21 @@ public class Controller {
             System.exit(0);
         }
         //handle btnStartGame
-        else if(clickedButton.equals(btnStartGame) && (Data.valueMap.get("openStages") == 1 || Data.valueMap.get("openstages") == 6)){
+        else if(clickedButton.equals(btnStartGame) && (Model.Data.valueMap.get("openStages") == 1 || Model.Data.valueMap.get("openstages") == 6)){
             //first login window for player pops out
             model.handleLoginWindow(0);
         }
         //call method that will open Spieleranzahl window
-        else if(clickedButton.equals(btnSpieleranzahl) && Data.valueMap.get("openStages") == 1)
+        else if(clickedButton.equals(btnSpieleranzahl) && Model.Data.valueMap.get("openStages") == 1)
             model.spieleranzahlBtnClicked();
             //call method that will open Botanzahl window
-        else if(clickedButton.equals(btnBotanzahl) && Data.valueMap.get("openStages") == 1)
+        else if(clickedButton.equals(btnBotanzahl) && Model.Data.valueMap.get("openStages") == 1)
             model.botanzahlBtnClicked();
             //call method that will open Theme window
-        else if(clickedButton.equals(btnSzene) && Data.valueMap.get("openStages") == 1)
+        else if(clickedButton.equals(btnSzene) && Model.Data.valueMap.get("openStages") == 1)
             model.szeneBtnClicked();
             //call method that will open Rule window
-        else if(clickedButton.equals(btnRegeln) && Data.valueMap.get("openStages") == 1)
+        else if(clickedButton.equals(btnRegeln) && Model.Data.valueMap.get("openStages") == 1)
             model.regelnBtnClicked();
 
     }
@@ -121,13 +121,13 @@ public class Controller {
       */
     public void btnPlayerOkClicked() {
         int playerinput = (int) sliderSpieler.getValue(); //get value of slider
-        if(playerinput + Data.valueMap.get("bot") > 5){ //max player number is exceed
+        if(playerinput + Model.Data.valueMap.get("bot") > 5){ //max player number is exceed
             btnPlayerOk.setText("Insgesamt zu viele Spieler!");
         }else { //if there aren't to many players+bots
-            Data.valueMap.put("spieler", playerinput); //put value into hashmap
+            Model.Data.valueMap.put("spieler", playerinput); //put value into hashmap
             Stage stage = (Stage) sliderSpieler.getScene().getWindow();
             stage.close(); //Stage spielerauswahl gets closed after button is clicked
-            Data.valueMap.put("openStages", 1);
+            Model.Data.valueMap.put("openStages", 1);
         }
     }
 
@@ -142,13 +142,13 @@ public class Controller {
      */
     public void btnBotOkClicked() {
         int botInput = (int) sliderBot.getValue(); //get value of slider
-        if (botInput + Data.valueMap.get("spieler") > 5) { //max player number is exceed
+        if (botInput + Model.Data.valueMap.get("spieler") > 5) { //max player number is exceed
             btnBotOk.setText("Insgesamt zu viele Spieler!");
         } else { //if there aren't to many players+bots
-            Data.valueMap.put("bot", (int) sliderBot.getValue()); //put value into hashmap
+            Model.Data.valueMap.put("bot", (int) sliderBot.getValue()); //put value into hashmap
             Stage stage = (Stage) sliderBot.getScene().getWindow();
             stage.close(); //Stage spielerauswahl gets closed after button is clicked
-            Data.valueMap.put("openStages", 1);
+            Model.Data.valueMap.put("openStages", 1);
         }
 
     }
@@ -165,34 +165,34 @@ public class Controller {
      */
     public void szeneButtonClicked(ActionEvent evt) {
 
-        int initialSzene = Data.valueMap.get("szene");
+        int initialSzene = Model.Data.valueMap.get("szene");
 
         //change background according to the scene and save theme to hashmap in Data class
         if(evt.getSource().equals(btnCasino)) {
-            Data.valueMap.put("szene", 1);
+            Model.Data.valueMap.put("szene", 1);
             BlackjackMainMenu.root.setStyle("-fx-background-image: url('/pictures/menumain.jpg')");
         }
         else if(evt.getSource().equals(btnTirol)){
-            Data.valueMap.put("szene", 2);
+            Model.Data.valueMap.put("szene", 2);
             BlackjackMainMenu.root.setStyle("-fx-background-image: url('/pictures/tirolMain.jpg')");
         }
         else if(evt.getSource().equals(btnStrand)){
-            Data.valueMap.put("szene", 3);
+            Model.Data.valueMap.put("szene", 3);
             BlackjackMainMenu.root.setStyle("-fx-background-image: url('/pictures/strandMain.jpg')");
         }
         else if(evt.getSource().equals(btnWeltall)){
-            Data.valueMap.put("szene", 4);
+            Model.Data.valueMap.put("szene", 4);
             BlackjackMainMenu.root.setStyle("-fx-background-image: url('/pictures/weltallMain.jpg')");
         }
         //if theme changed, the music changes too
-        if(initialSzene != Data.valueMap.get("szene")) {
-            Music.stopMusic();
-            Music.playMusic();
+        if(initialSzene != Model.Data.valueMap.get("szene")) {
+            Model.Music.stopMusic();
+            Model.Music.playMusic();
         } //if theme stays the same, music just goes on
 
         Stage stage = (Stage) btnCasino.getScene().getWindow();
         stage.close(); //Stage szene gets closed after a button is clicked
-        Data.valueMap.put("openStages", 1);
+        Model.Data.valueMap.put("openStages", 1);
 
     }
 
@@ -205,7 +205,7 @@ public class Controller {
     public void btnRulesOkClicked(){
         Stage stage = (Stage) btnRulesOk.getScene().getWindow();
         stage.close(); //Stage rules gets closed after button is clicked
-        Data.valueMap.put("openStages", 1);
+        Model.Data.valueMap.put("openStages", 1);
     }
 
 
@@ -287,12 +287,7 @@ public class Controller {
                         decryptedFile.createNewFile();
                     }else { //File exists
                         //decrypt encrypted file
-                        try {
-                            CryptoUtils.decrypt(key, encryptedFile, decryptedFile); //decrypt file here
-                        } catch (CryptoException ex) {
-                            System.out.println(ex.getMessage());
-                            ex.printStackTrace();
-                        }
+                        Model.CryptoUtils.decrypt(key, encryptedFile, decryptedFile); //decrypt file here
 
                         //check if name is already in use
                         Scanner scanner = new Scanner(decryptedFile);
@@ -333,12 +328,7 @@ public class Controller {
                     //Data is now in the csv
 
                     //encrypt the file again
-                    try {
-                        CryptoUtils.encrypt(key, decryptedFile, encryptedFile);
-                    } catch (CryptoException ex) {
-                        System.out.println(ex.getMessage());
-                        ex.printStackTrace();
-                    }
+                    Model.CryptoUtils.encrypt(key, decryptedFile, encryptedFile);
                     //delete decrypted file
                     decryptedFile.delete();
 
@@ -364,12 +354,7 @@ public class Controller {
                 return;
             } else { //if file exists
                 //decrypt file
-                try {
-                    CryptoUtils.decrypt(key, encryptedFile, decryptedFile); //decrypt file here
-                } catch (CryptoException ex) {
-                    System.out.println(ex.getMessage());
-                    ex.printStackTrace();
-                }
+                Model.CryptoUtils.decrypt(key, encryptedFile, decryptedFile); //decrypt file here
             }
             //now we have a decrypted file
 
@@ -392,7 +377,7 @@ public class Controller {
                 if (usernameInput.equals(values[0])) { //name found
                     //now check if this user is already logged in
                     ArrayList<String> nameList;
-                    nameList = Data.spielerMapGetNames();
+                    nameList = Model.Data.spielerMapGetNames();
                     for (String name : nameList) {
                         if (name.equals(usernameInput)) {
                             stateLogin = 3; //user already signed in
@@ -416,12 +401,7 @@ public class Controller {
             }
             scanner.close();
             //encrypt file again
-            try {
-                CryptoUtils.encrypt(key, decryptedFile, encryptedFile);
-            } catch (CryptoException ex) {
-                System.out.println(ex.getMessage());
-                ex.printStackTrace();
-            }
+            Model.CryptoUtils.encrypt(key, decryptedFile, encryptedFile);
             //delete decryptedFile
             decryptedFile.delete();
 
@@ -445,8 +425,8 @@ public class Controller {
                 decryptedFile.delete();
 
             //Save guest to Hashmap with default data, guest 1 gets name guest1 with ID -1, guest 2 gets guest2 with ID-2
-            model.safePlayerDataToHashmap("guest"+Data.guestAnzahl, (Data.guestAnzahl)*(-1), 0,0,1000);
-            Data.guestAnzahl++;
+            model.safePlayerDataToHashmap("guest"+Model.Data.guestAnzahl, (Model.Data.guestAnzahl)*(-1), 0,0,1000);
+            Model.Data.guestAnzahl++;
             //After everything is done -> next login or game start
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close(); //Stage szene gets closed after button is clicked
@@ -455,15 +435,15 @@ public class Controller {
 
         int spieler = Integer.parseInt(lblSpielerLogin.getText().replaceAll("\\D+", ""));
         if(worked) {
-            Data.valueMap.put("openStages", 1);
-            if(Data.valueMap.get("spieler") > spieler)
+            Model.Data.valueMap.put("openStages", 1);
+            if(Model.Data.valueMap.get("spieler") > spieler)
                 model.handleLoginWindow(spieler);
         }
 
         if(worked) {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close(); //Stage szene gets closed after button is clicked
-	    if(Data.valueMap.get("spieler") == spieler) // all players logged in, game can be started
+	    if(Model.Data.valueMap.get("spieler") == spieler) // all players logged in, game can be started
                 model.startGameBtnClicked();
         }
     }
@@ -474,7 +454,7 @@ public class Controller {
      * gets called from click on btnLeaderboard button
      */
     public void btnLeaderboardClicked() throws IOException {
-        if(Data.valueMap.get("openStages") == 1)
+        if(Model.Data.valueMap.get("openStages") == 1)
             model.handleLeaderboardWindow();
     }
 

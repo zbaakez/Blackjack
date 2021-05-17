@@ -41,11 +41,25 @@ public class BlackJack {
     public void action(Action action){
         if(action==Action.HIT){
             players[turnPlayer].addCard(deck.draw());
-            nextTurnPlayer();
+            if(getValue(players[turnPlayer])>21){
+                notStanding.remove(players[turnPlayer]);
+            }
+            if(nextTurnPlayer()==false){
+                dealersTurn();
+            }
+
         }
         else if(action==Action.STAND){
             notStanding.remove(players[turnPlayer]);
-            nextTurnPlayer();
+            if(nextTurnPlayer()==false){
+                dealersTurn();
+            }
+        }
+        else if(action==Action.DOUBLE_DOWN){
+
+        }
+        else if(action==Action.SPLIT){
+
         }
 
     }
@@ -69,17 +83,66 @@ public class BlackJack {
         return dealer;
     }
 
-    public int getValue(int player){
+    public int getValue(Player player){
         int value=0;
-        for(Card card : players[player].getHand()){
-            value+=Card.cardValueToInt(card.getValue());
+        for(Card card : player.getHand()){
+            if(Card.cardValueToInt(card.getValue())==12 ||Card.cardValueToInt(card.getValue())==11 ||Card.cardValueToInt(card.getValue())==10){
+                value+=10;
+            }
+            else if(Card.cardValueToInt(card.getValue())==0){
+                value+=0;
+            }
+            else{
+                value+=Card.cardValueToInt(card.getValue())+1;
+            }
+
         }
-
-
+        for(Card card : player.getHand()){
+            if(Card.cardValueToInt(card.getValue())==0){
+                if(value<11){
+                    value+=11;
+                }
+                else{
+                    value+=1;
+                }
+            }
+        }
         return value;
     }
 
     public Player[] getPlayers() {
         return players;
     }
+
+    public void checkWinner(){
+        for(Player p : players){
+            System.out.println(getValue(p));
+            System.out.println(getValue(getDealer()));
+            if(getValue(p)>getValue(getDealer()) && getValue(p)<22){
+                System.out.println("WIN");
+            }
+            else if(getValue(p) == getValue(getDealer())) {
+                System.out.println("Draw");
+            }
+            else{
+                System.out.println("Lose");
+            }
+        }
+
+    }
+
+    public void dealersTurn(){
+        while (getValue(getDealer())<17){
+            dealer.addCard(deck.draw());
+        }
+        checkWinner();
+
+    }
+
+
+
+
+
+
+
 }
