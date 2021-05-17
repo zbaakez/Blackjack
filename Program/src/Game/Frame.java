@@ -2,6 +2,7 @@ package Game;
 
 import Game.BlackJack;
 import Model.Data;
+import Model.Spieler;
 import org.w3c.dom.Text;
 
 import javax.imageio.ImageIO;
@@ -21,11 +22,11 @@ public class Frame  extends JFrame {
     Field field = new Field(this, scene);
     int turn = 0;
     private Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-    private Label[] textfields = new Label[field.getBlackjack().getPlayers().length];
+    private Label[] textfieldsPlayername = new Label[field.getBlackjack().getPlayers().length];
+    private Label[] textfieldsPoints = new Label[field.getBlackjack().getPlayers().length];
+    private Label[] textfieldsWager = new Label[field.getBlackjack().getPlayers().length];
 
-    //public Frame(int players, int scene) throws InterruptedException {
-
-    public Frame() throws InterruptedException, IOException {
+    public Frame() throws IOException {
         //this.scene=scene;
         //this.player=players;
         this.setLayout(null);
@@ -47,27 +48,50 @@ public class Frame  extends JFrame {
 
     public void setTextfields() {
 
-
         for (int i = 0; i < field.getBlackjack().getPlayers().length; i++) {
-            textfields[i] = new Label();
+            textfieldsPlayername[i] = new Label();
+            textfieldsPoints[i] = new Label();
+            textfieldsWager[i] = new Label();
+            if(!Data.spielerMap.containsKey(i)){
+                Spieler spieler = new Spieler("bot"+String.valueOf(i-Data.valueMap.get("spieler")+1), i, 0, 0, 9999999); // bot has unlimited money
+                Data.spielerMap.put(i, spieler);
+            }
+            textfieldsPlayername[i].setText(Data.spielerMap.get(i).getSpielername());
+            textfieldsWager[i].setText("Einsatz!"); // put variable for input here
         }
 
-        int c = 0;
         for (int j = 0; j < field.getBlackjack().getPlayers().length; j++) {
-            textfields[j].setBounds(field.scaleX(270 + c), field.scaleY(700), 70, 30);
-            c += 270;
+            textfieldsPlayername[j].setBounds(field.getXPos(j) + 10, field.getYPos(j) - 120, 100, 30);
+            textfieldsPoints[j].setBounds(field.getXPos(j) + 10, field.getYPos(j) - 80, 100, 30);
+            textfieldsWager[j].setBounds(field.getXPos(j) + 10, field.getYPos(j) - 40, 100, 30);
+            textfieldsWager[j].setFont(new Font("BODONI MT BLACK", Font.BOLD, 20));
+            textfieldsPoints[j].setFont(new Font("BODONI MT BLACK", Font.BOLD, 20));
+            textfieldsPlayername[j].setFont(new Font("BODONI MT BLACK", Font.BOLD, 20));
+
         }
 
         for (int o = 0; o < field.getBlackjack().getPlayers().length; o++) {
-            this.add(textfields[o]);
+            this.add(textfieldsPlayername[o]);
+            this.add(textfieldsPoints[o]);
+            this.add(textfieldsWager[o]);
         }
-
 
     }
 
-    public void setValueToTextfields() {
+    public void setValueToTextfields(int turn) {
         for (int i = 0; i < field.getBlackjack().getPlayers().length; i++) {
-            textfields[i].setText(i + " " + String.valueOf(field.getBlackjack().getValue(field.getBlackjack().getPlayers()[i])));
+            textfieldsPoints[i].setText(String.valueOf(field.getBlackjack().getValue(field.getBlackjack().getPlayers()[i])));
+            if(i==turn) {
+                textfieldsPoints[i].setBackground(Color.RED);
+                textfieldsWager[i].setBackground(Color.RED);
+                textfieldsPlayername[i].setBackground(Color.RED);
+
+            }
+            else {
+                textfieldsPoints[i].setBackground(Color.WHITE);
+                textfieldsWager[i].setBackground(Color.WHITE);
+                textfieldsPlayername[i].setBackground(Color.WHITE);
+            }
         }
 
     }
@@ -81,7 +105,6 @@ public class Frame  extends JFrame {
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         int width = (int)size.getWidth();
         int height = (int)size.getHeight();
-        System.out.println(width + " " + height);
         hit.setBounds((int) Math.round(width - (width*0.92)) , (int) Math.round(height - (height*0.65)), 200, 100);
         stand.setBounds(hit.getX() + 300 , (int) Math.round(height - (height*0.65)), 200, 100);
         split.setBounds((int) Math.round((width*0.92) - 200) , (int) Math.round(height - (height*0.65)), 200, 100);

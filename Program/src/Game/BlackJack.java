@@ -18,6 +18,10 @@ public class BlackJack {
     private Deck deck = new Deck();
     private int turnPlayer=0;
 
+    public int getTurnPlayer(){
+        return turnPlayer;
+    }
+
     public BlackJack(int numberOfPlayers) {
         this.players = new Player[numberOfPlayers];
         for(int i=0;i<numberOfPlayers;i++){

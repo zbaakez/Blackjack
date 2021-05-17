@@ -27,4 +27,5 @@ public class Player {
     public List<Card> getHand() {
         return hand;
     }
+
 }

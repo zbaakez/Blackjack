@@ -94,7 +94,7 @@ public class Field extends Canvas {
     }
 
     public void uiUpdate(){
-            frame.setValueToTextfields();
+        frame.setValueToTextfields(blackjack.getTurnPlayer());
     }
 
     public void drawCard(int x, int y, Card card, Graphics g){
@@ -158,7 +158,6 @@ public class Field extends Canvas {
     }
 
     public int getCardPosition() {
-
 
         return 0;
     }

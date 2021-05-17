@@ -78,7 +78,7 @@ public class Spieler {
      * @param siegeAnzahl as Integer
      * @param geld as Integer
      */
-    Spieler(String spielername, int ID, int spieleAnzahl, int siegeAnzahl, int geld){
+    public Spieler(String spielername, int ID, int spieleAnzahl, int siegeAnzahl, int geld){
         this.spielername=spielername;
         this.ID=ID;
         this.spieleAnzahl=spieleAnzahl;
