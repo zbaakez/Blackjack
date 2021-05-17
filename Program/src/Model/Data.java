@@ -17,6 +17,9 @@ public class Data {
     // Data gets saved in Object from class Spieler
     static public HashMap<Integer, Spieler> spielerMap = new HashMap<>();
 
+    //Hashmap that saves bets for each player
+    static public HashMap<Integer, Integer> betMap = new HashMap<>();
+
     //saves how many guests are logged in
     static public int guestAnzahl = 1;
 

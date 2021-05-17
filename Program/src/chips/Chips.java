@@ -1,5 +1,8 @@
 package chips;
 
+import Model.Data;
+import Model.Spieler;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -33,13 +36,14 @@ public class Chips extends JFrame {
     String spieler;
     int screenHeight = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height;
     Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
-
+    int whichPlayer;
     Color colorPanel=new Color(2, 102, 47);
     Timer t1;
 
-    public Chips(String spieler){
+    public Chips(String spieler, int whichPlayer){
         this.spieler=spieler;
         System.out.println(spieler);
+        this.whichPlayer = whichPlayer;
 
         setSize(ICONSIZE*3,ICONSIZE*2+80);
         setLocation(0,(int)screenHeight-ICONSIZE*2-80);
@@ -108,7 +112,6 @@ public class Chips extends JFrame {
                     setLocation(getX(), y);
                 }
                 else {
-                    System.out.println(getTotalBet() + spieler);
                     dispose();
                     t1.stop();
                 }
@@ -198,10 +201,21 @@ public class Chips extends JFrame {
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    animation();
-                } catch (InterruptedException interruptedException) {
-                    interruptedException.printStackTrace();
+                if(getTotalBet() <= Data.spielerMap.get(whichPlayer).getGeld()) {
+                    //save bet to betMap
+                    Data.betMap.put(whichPlayer, getTotalBet());
+                    //save new money (Money before - bet)
+                    Spieler spieler = new Spieler(Data.spielerMap.get(whichPlayer).getSpielername(), Data.spielerMap.get(whichPlayer).getID(), Data.spielerMap.get(whichPlayer).getSpieleAnzahl(), Data.spielerMap.get(whichPlayer).getSiegeAnzahl(), Data.spielerMap.get(whichPlayer).getGeld() - getTotalBet());
+                    Data.spielerMap.put(whichPlayer, spieler);
+                    if(whichPlayer == Data.valueMap.get("spieler")-1)
+                        Data.valueMap.put("openStages", 1);
+                    try {
+                        animation();
+                    } catch (InterruptedException interruptedException) {
+                        interruptedException.printStackTrace();
+                    }
+                }else{
+                    ok.setText("Not enough money");
                 }
             }
         });
@@ -216,13 +230,15 @@ public class Chips extends JFrame {
         allin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //save bet to betMap
+                Data.betMap.put(whichPlayer, Data.spielerMap.get(whichPlayer).getGeld());
+                //save new money (1)
+                Spieler spieler = new Spieler(Data.spielerMap.get(whichPlayer).getSpielername(), Data.spielerMap.get(whichPlayer).getID(), Data.spielerMap.get(whichPlayer).getSpieleAnzahl(), Data.spielerMap.get(whichPlayer).getSiegeAnzahl(), 1);
+                Data.spielerMap.put(whichPlayer, spieler);
+                if(whichPlayer == Data.valueMap.get("spieler")-1)
+                    Data.valueMap.put("openStages", 1);
                 try {
                     animation();
-
-                    /*asdhasjdkashjkdhaskjdhaskjdhaskhdajhjahdsjkhasssssssssssssssssssssss
-                    bet=1000;
-                    asdasdasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                     */
                 } catch (InterruptedException interruptedException) {
                     interruptedException.printStackTrace();
                 }
