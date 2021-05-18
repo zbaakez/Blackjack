@@ -19,6 +19,8 @@ public class Data {
 
     //Hashmap that saves bets for each player
     static public HashMap<Integer, Integer> betMap = new HashMap<>();
+    //Hashmap that saves payout for each player
+    static public HashMap<Integer, Integer> payoutMap = new HashMap<>();
 
     //saves how many guests are logged in
     static public int guestAnzahl = 1;

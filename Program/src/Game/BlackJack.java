@@ -1,5 +1,7 @@
 package Game;
 
+import Model.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,18 +121,45 @@ public class BlackJack {
     }
 
     public void checkWinner(){
+        int ii = 0;
+        Data.valueMap.put("openStages", 2);
+        int dealerValue = getValue(getDealer());
+        int playerValue;
+        boolean win;
         for(Player p : players){
-            System.out.println(getValue(p));
-            System.out.println(getValue(getDealer()));
-            if(getValue(p)>getValue(getDealer()) && getValue(p)<22){
-                System.out.println("WIN");
+            win=false;
+            playerValue = getValue(p);
+            //first check if player is below or even on 21
+            if(playerValue <= 21){
+                if(playerValue==21 && dealerValue != 21){ //blackjack
+                    //payout 1:2,5
+                    Data.payoutMap.put(ii, (int)Math.round(Data.betMap.get(ii)*2.5));
+                    win=true;
+                }
+                else if(playerValue>dealerValue){ // player wins
+                    //payout 2:1
+                    Data.payoutMap.put(ii,  Data.betMap.get(ii)*2);
+                    win=true;
+                }else if(playerValue==dealerValue){ //draw
+                    //payout 1:1
+                    Data.payoutMap.put(ii, Data.betMap.get(ii));
+                }else if(dealerValue>playerValue && dealerValue<=21){ // dealer wins
+                    //payout none
+                    Data.payoutMap.put(ii, 0);
+                }else if(dealerValue > 21){ // player wins
+                    //payout 1:2
+                    Data.payoutMap.put(ii, Data.betMap.get(ii)*2);
+                    win=true;
+                }
+
+            }else{ // busted
+                Data.payoutMap.put(ii, 0);
             }
-            else if(getValue(p) == getValue(getDealer())) {
-                System.out.println("Draw");
-            }
-            else{
-                System.out.println("Lose");
-            }
+            //add payout, win and number of games++ to csv and spielermap
+
+
+
+            ii++;
         }
 
     }
