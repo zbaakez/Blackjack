@@ -21,3 +21,9 @@
     -fx-font-family: "Bodoni MT Black";
     -fx-font-size: 20;
 }
+#lblHead{
+    -fx-text-fill: red;
+    -fx-opacity: 0.9;
+    -fx-font-family: "Bodoni MT Black";
+    -fx-font-size: 30;
+}

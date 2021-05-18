@@ -144,6 +144,7 @@ public class BlackJack {
         int playerValue;
         int win;
         for(Player p : players){
+            Data.winMap.put(ii,0);
             win=0;
             playerValue = getValue(p);
             //first check if player is below or even on 21
@@ -153,16 +154,19 @@ public class BlackJack {
                     if(Data.betMap.get(ii) != null)
                         Data.payoutMap.put(ii, (int)Math.round(Data.betMap.get(ii)*2.5));
                     win=1;
+                    Data.winMap.put(ii,1);
                 }
                 else if(playerValue>dealerValue){ // player wins
                     //payout 2:1
                     if(Data.betMap.get(ii) != null)
                         Data.payoutMap.put(ii,  Data.betMap.get(ii)*2);
                     win=1;
+                    Data.winMap.put(ii,1);
                 }else if(playerValue==dealerValue){ //draw
                     //payout 1:1
                     if(Data.betMap.get(ii) != null)
                         Data.payoutMap.put(ii, Data.betMap.get(ii));
+                    Data.winMap.put(ii,2);
                 }else if(dealerValue>playerValue && dealerValue<=21){ // dealer wins
                     //payout none
                     if(Data.betMap.get(ii) != null)
@@ -172,6 +176,7 @@ public class BlackJack {
                     if(Data.betMap.get(ii) != null)
                         Data.payoutMap.put(ii, Data.betMap.get(ii)*2);
                     win=1;
+                    Data.winMap.put(ii,1);
                 }
 
             }else{ // busted
@@ -181,7 +186,10 @@ public class BlackJack {
             //add payout, win and number of games++ to csv and spielermap (only if players arent bots)
             if(Data.spielerMap.get(ii) != null && Data.betMap.get(ii) != null) {
                 // first to hashmap
-                Spieler spieler = new Spieler(Data.spielerMap.get(ii).getSpielername(), Data.spielerMap.get(ii).getID(), Data.spielerMap.get(ii).getSpieleAnzahl()+1, Data.spielerMap.get(ii).getSiegeAnzahl()+win, Data.spielerMap.get(ii).getGeld()+Data.payoutMap.get(ii));
+                int money = Data.spielerMap.get(ii).getGeld()+Data.payoutMap.get(ii);
+                if(money == 0)
+                    money=1;
+                Spieler spieler = new Spieler(Data.spielerMap.get(ii).getSpielername(), Data.spielerMap.get(ii).getID(), Data.spielerMap.get(ii).getSpieleAnzahl()+1, Data.spielerMap.get(ii).getSiegeAnzahl()+win, money);
                 Data.spielerMap.put(ii, spieler);
 
                 // now save to csv
@@ -213,10 +221,10 @@ public class BlackJack {
                         //splitter[4] == number wins
                         //splitter[5] == money
                         sb2.delete(0,sb2.length());
-                        int money = Data.spielerMap.get(ii).getGeld();
-                        if(money==0) //you cant have 0 money
-                            money=1;
-                        sb2.append(splitter[0]).append("§").append(splitter[1]).append("§").append(splitter[2]).append("§").append(Data.spielerMap.get(ii).getSpieleAnzahl()).append("§").append(Data.spielerMap.get(ii).getSiegeAnzahl()).append("§").append(money);
+                        int moneyx = Data.spielerMap.get(ii).getGeld();
+                        if(moneyx==0) //you cant have 0 money
+                            moneyx=1;
+                        sb2.append(splitter[0]).append("§").append(splitter[1]).append("§").append(splitter[2]).append("§").append(Data.spielerMap.get(ii).getSpieleAnzahl()).append("§").append(Data.spielerMap.get(ii).getSiegeAnzahl()).append("§").append(moneyx);
                         line=sb2.toString();
                     }
                     else
@@ -227,7 +235,6 @@ public class BlackJack {
                 }
 
                 scanner.close();
-                System.out.println(sb);
                 FileWriter writer = new FileWriter(decryptedFile);
                 writer.write(sb.toString());
                 writer.close();

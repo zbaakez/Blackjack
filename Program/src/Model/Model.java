@@ -26,9 +26,7 @@ public class Model {
      * game starts from here
      */
     public void startGameBtnClicked() throws Exception {
-        //Object of game with object(Data.valueMap(), Data.spielerMap);
         Game.MainGUI.main();
-        System.out.println(Data.hashMapToString());
     }
 
     /**

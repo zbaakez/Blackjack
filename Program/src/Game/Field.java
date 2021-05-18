@@ -54,6 +54,10 @@ public class Field extends Canvas {
     public void start(){
         thread = new Thread(()-> {
             while(true) {
+                if(Data.getCloseFrame()) {
+                    frame.dispose();
+                    break;
+                }
                 BufferStrategy bs = this.getBufferStrategy();
                 if (bs == null) {
                     createBufferStrategy(3);

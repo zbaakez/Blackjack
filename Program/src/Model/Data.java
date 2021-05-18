@@ -21,6 +21,18 @@ public class Data {
     static public HashMap<Integer, Integer> betMap = new HashMap<>();
     //Hashmap that saves payout for each player
     static public HashMap<Integer, Integer> payoutMap = new HashMap<>();
+    //Hashmap that saves if a player won/lost/draw, 0=loose, 1=win, 2=draw
+    static public HashMap<Integer, Integer> winMap = new HashMap<>();
+    public static boolean getCloseFrame() {
+        return closeFrame;
+    }
+    public static void setCloseFrame(boolean closeFrame) {
+        Data.closeFrame = closeFrame;
+    }
+
+    //Hashmap that closes frame if true
+    static private boolean closeFrame = false;
+
 
     //saves how many guests are logged in
     static public int guestAnzahl = 1;
