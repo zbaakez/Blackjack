@@ -80,6 +80,9 @@ public class ControllerEndscreen {
         for(int i =0; i<Data.betMap.size(); i++){
             Data.betMap.put(i,0);
         }
+        JavaFXInitializer fx = new JavaFXInitializer();
+        fx.start(new Stage());
+        Data.valueMap.put("openStages", 1);
         Stage stage = (Stage) btnExit.getScene().getWindow();
         stage.close(); //Stage szene gets closed after a button is clicked
     }

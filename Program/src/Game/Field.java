@@ -52,10 +52,13 @@ public class Field extends Canvas {
     }
 
     public void start(){
+
         thread = new Thread(()-> {
+            boolean closer = false;
             while(true) {
-                if(Data.getCloseFrame()) {
+                if(Data.getCloseFrame() || closer) {
                     frame.dispose();
+                    Data.setCloseFrame(false);
                     break;
                 }
                 BufferStrategy bs = this.getBufferStrategy();
@@ -63,16 +66,21 @@ public class Field extends Canvas {
                     createBufferStrategy(3);
                     continue;
                 }
+                closer = Data.getCloseFrame();
                 Graphics g = bs.getDrawGraphics();
                 draw(g);
                 uiUpdate();
                 g.dispose();
                 bs.show();
+                closer = Data.getCloseFrame();
                 try {
+                    closer = Data.getCloseFrame();
                     Thread.sleep(100);
+                    closer = Data.getCloseFrame();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                closer = Data.getCloseFrame();
             }
         });
         thread.start();

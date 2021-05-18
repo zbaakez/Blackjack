@@ -249,8 +249,6 @@ public class BlackJack {
             }
             ii++;
         }
-        //ViewEndscreen viewEndscreen = new ViewEndscreen();
-        //viewEndscreen.openEndScreen();
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -260,7 +258,6 @@ public class BlackJack {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
         });
 
