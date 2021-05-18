@@ -3,6 +3,8 @@ package Game;
 import Model.CryptoException;
 import Model.Data;
 import Model.Spieler;
+import View.View;
+import javafx.application.Platform;
 
 import javax.swing.*;
 import java.io.File;
@@ -240,6 +242,21 @@ public class BlackJack {
             }
             ii++;
         }
+        //ViewEndscreen viewEndscreen = new ViewEndscreen();
+        //viewEndscreen.openEndScreen();
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                ViewEndscreen viewEndscreen = new ViewEndscreen();
+                try {
+                    viewEndscreen.openEndScreen();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
 
     }
 
