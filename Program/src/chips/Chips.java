@@ -247,7 +247,7 @@ public class Chips extends JFrame {
                 //save bet to betMap
                 Data.betMap.put(whichPlayer, Data.spielerMap.get(whichPlayer).getGeld());
                 //save new money (1)
-                Spieler spieler = new Spieler(Data.spielerMap.get(whichPlayer).getSpielername(), Data.spielerMap.get(whichPlayer).getID(), Data.spielerMap.get(whichPlayer).getSpieleAnzahl(), Data.spielerMap.get(whichPlayer).getSiegeAnzahl(), 1);
+                Spieler spieler = new Spieler(Data.spielerMap.get(whichPlayer).getSpielername(), Data.spielerMap.get(whichPlayer).getID(), Data.spielerMap.get(whichPlayer).getSpieleAnzahl(), Data.spielerMap.get(whichPlayer).getSiegeAnzahl(), 0);
                 Data.spielerMap.put(whichPlayer, spieler);
                 if(whichPlayer == Data.valueMap.get("spieler")-1)
                     Data.valueMap.put("openStages", 1);

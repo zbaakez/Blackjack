@@ -385,6 +385,17 @@ public class Controller {
                         }
                     }
                 }
+                else {
+                    ArrayList<String> nameList;
+                    nameList = Model.Data.spielerMapGetNames();
+                    for (String name : nameList) {
+                        if (name.equals(usernameInput)) {
+                            stateLogin = 3; //user already signed in
+                            break;
+                        }
+                    }
+                    break;
+                }
 
                 if (stateLogin!=3){
                     //name is found

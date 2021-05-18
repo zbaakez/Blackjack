@@ -1,6 +1,7 @@
 package Game;
 
 import Game.BlackJack;
+import Model.CryptoException;
 import Model.Data;
 import Model.Spieler;
 import chips.Chips;
@@ -135,29 +136,57 @@ public class Frame  extends JFrame {
         hit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Data.valueMap.get("openStages")==1)
-                    handleButtonAction("Hit");
+                if(Data.valueMap.get("openStages")==1) {
+                    try {
+                        handleButtonAction("Hit");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    } catch (CryptoException cryptoException) {
+                        cryptoException.printStackTrace();
+                    }
+                }
             }
         });
         stand.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Data.valueMap.get("openStages")==1)
-                    handleButtonAction("Stand");
+                if(Data.valueMap.get("openStages")==1) {
+                    try {
+                        handleButtonAction("Stand");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    } catch (CryptoException cryptoException) {
+                        cryptoException.printStackTrace();
+                    }
+                }
             }
         });
         split.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Data.valueMap.get("openStages")==1)
-                    handleButtonAction("Split");
+                if(Data.valueMap.get("openStages")==1) {
+                    try {
+                        handleButtonAction("Split");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    } catch (CryptoException cryptoException) {
+                        cryptoException.printStackTrace();
+                    }
+                }
             }
         });
         dble.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Data.valueMap.get("openStages")==1)
-                    handleButtonAction("Double");
+                if(Data.valueMap.get("openStages")==1) {
+                    try {
+                        handleButtonAction("Double");
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    } catch (CryptoException cryptoException) {
+                        cryptoException.printStackTrace();
+                    }
+                }
             }
         });
 
@@ -178,7 +207,7 @@ public class Frame  extends JFrame {
         });
     }
 
-    public void handleButtonAction(String button) {
+    public void handleButtonAction(String button) throws IOException, CryptoException {
         if (button.equals("Hit")) {
             field.getBlackjack().action(BlackJack.Action.HIT);
         } else if (button.equals("Stand")) {
