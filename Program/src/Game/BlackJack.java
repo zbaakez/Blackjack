@@ -27,6 +27,7 @@ public class BlackJack {
     private Player dealer;
     private Deck deck = new Deck();
     private int turnPlayer=0;
+    private int bets;
 
     public int getTurnPlayer(){
         return turnPlayer;
@@ -70,10 +71,16 @@ public class BlackJack {
             }
         }
         else if(action==Action.DOUBLE_DOWN){
-
+            Data.betMap.put(turnPlayer, Data.betMap.get(turnPlayer)*2);
+            players[turnPlayer].addCard(deck.draw());
+            if(getValue(players[turnPlayer])>=21){
+                notStanding.remove(players[turnPlayer]);
+            }
+            if(nextTurnPlayer()==false){
+                dealersTurn();
+            }
         }
         else if(action==Action.SPLIT){
-
         }
 
     }
