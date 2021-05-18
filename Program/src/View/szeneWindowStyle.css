@@ -6,7 +6,7 @@
 
 .label {
     -fx-text-fill: yellow;
-    -fx-opacity: 0.8;
+    -fx-opacity: 0.9;
 }
 .button{
     -fx-background-color: black;
@@ -36,5 +36,5 @@
     -fx-background-position: 90%;
 }
 .button:hover {
-    -fx-opacity: 0.8;
+    -fx-opacity: 0.9;
 }

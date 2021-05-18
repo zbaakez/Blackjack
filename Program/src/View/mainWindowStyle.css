@@ -5,11 +5,11 @@
 }
 .button{
     -fx-background-color: yellow;
-    -fx-opacity: 0.8;
+    -fx-opacity: 0.9;
 }
 .button:hover {
     -fx-background-color: orange;
-    -fx-opacity: 0.8;
+    -fx-opacity: 0.9;
 }
 #btnMute{
     -fx-background-color: white;
@@ -20,9 +20,9 @@
 }
 #btnExit{
     -fx-background-color: LightCoral;
-    -fx-opacity: 0.88;
+    -fx-opacity: 0.95;
 }
 #btnExit:hover{
     -fx-background-color: Red;
-    -fx-opacity: 0.8;
+    -fx-opacity: 0.95;
 }

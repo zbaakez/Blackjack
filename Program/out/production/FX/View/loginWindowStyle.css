@@ -5,11 +5,11 @@
 }
 .button{
     -fx-background-color: yellow;
-    -fx-opacity: 0.8;
+    -fx-opacity: 0.9;
 }
 .button:hover {
     -fx-background-color: orange;
-    -fx-opacity: 0.8;
+    -fx-opacity: 0.9;
 }
 .label{
     -fx-text-fill: yellow;

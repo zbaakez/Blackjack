@@ -6,18 +6,18 @@
 
 .button {
     -fx-background-color: yellow;
-    -fx-opacity: 0.8;
+    -fx-opacity: 0.9;
     -fx-font-family: "Bodoni MT Black";
     -fx-font-size: 20;
 }
 
 .button:hover {
     -fx-background-color: orange;
-    -fx-opacity: 0.8;
+    -fx-opacity: 0.9;
 }
 .label{
     -fx-text-fill: yellow;
-    -fx-opacity: 0.8;
+    -fx-opacity: 0.9;
     -fx-font-family: "Bodoni MT Black";
     -fx-font-size: 20;
 }

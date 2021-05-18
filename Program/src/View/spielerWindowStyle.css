@@ -9,14 +9,14 @@
 }
 .label {
     -fx-text-fill: yellow;
-    -fx-opacity: 0.8;
+    -fx-opacity: 0.9;
 }
 .button {
     -fx-background-color: yellow;
-    -fx-opacity: 0.8;
+    -fx-opacity: 0.9;
     -fx-font-family: "Bodoni MT Black";
 }
 .button:hover {
     -fx-background-color: orange;
-    -fx-opacity: 0.8;
+    -fx-opacity: 0.9;
 }
