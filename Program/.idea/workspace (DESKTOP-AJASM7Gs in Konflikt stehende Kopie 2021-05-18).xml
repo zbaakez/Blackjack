@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="991bf1e8-b1ed-404a-bc62-6109224092d3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/out/production/FX/Controller/Controller.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FX/Controller/ControllerLeaderboardWindow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FX/Game/Field.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FX/Model/Model.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FX/Model/Music.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FX/View/BlackjackMainMenu$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FX/View/BlackjackMainMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FX/View/View.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game/Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game/Frame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Data.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chips/Chips.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chips/Chips.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1sUon2jx1pp4fD6YjLZqvQ5x1q9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/OneDrive/Desktop/git/Program" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration name="BlackjackMainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../../../../../../../../Program Files/Java/jdk-14.0.2" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="View.BlackjackMainMenu" />
+      <module name="FX" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml --add-modules=javafx.controls,javafx.media " />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.BlackjackMainMenu" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="991bf1e8-b1ed-404a-bc62-6109224092d3" name="Default Changelist" comment="" />
+      <created>1620936692799</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1620936692799</updated>
+      <workItem from="1620936695133" duration="264000" />
+      <workItem from="1621242677377" duration="687000" />
+      <workItem from="1621252255622" duration="148000" />
+      <workItem from="1621252490481" duration="2205000" />
+      <workItem from="1621257285704" duration="421000" />
+      <workItem from="1621257761833" duration="1284000" />
+      <workItem from="1621259076397" duration="877000" />
+      <workItem from="1621260003170" duration="269000" />
+      <workItem from="1621260293598" duration="2189000" />
+      <workItem from="1621269418348" duration="3329000" />
+      <workItem from="1621272976024" duration="84000" />
+      <workItem from="1621281759640" duration="180000" />
+      <workItem from="1621282082542" duration="243000" />
+      <workItem from="1621282344735" duration="153000" />
+      <workItem from="1621282540701" duration="200000" />
+      <workItem from="1621285352481" duration="162000" />
+      <workItem from="1621285591147" duration="45000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>

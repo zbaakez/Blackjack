@@ -55,7 +55,7 @@ public class Chips extends JFrame {
         panel.setBackground(colorPanel);
 
         player=new JLabel(playername,SwingConstants.CENTER);
-        player.setText(playername);
+        player.setText(playername + ", Geld: " + Data.spielerMap.get(whichPlayer).getGeld());
         player.setBounds(ICONSIZE*3/4,ICONSIZE*5/2,ICONSIZE*3/2,ICONSIZE/3);
         player.setFont(new Font("Comic Sans",Font.BOLD,25));
         player.setBorder(BorderFactory.createLineBorder(new Color(0, 54, 18),5));
@@ -158,6 +158,7 @@ public class Chips extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 betlist.add(1);
+                player.setText(playername + ", Geld: " + (Data.spielerMap.get(whichPlayer).getGeld()-getTotalBet()));
             }
         });
 
@@ -165,6 +166,7 @@ public class Chips extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 betlist.add(5);
+                player.setText(playername + ", Geld: " + (Data.spielerMap.get(whichPlayer).getGeld()-getTotalBet()));
             }
         });
 
@@ -172,6 +174,7 @@ public class Chips extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 betlist.add(25);
+                player.setText(playername + ", Geld: " + (Data.spielerMap.get(whichPlayer).getGeld()-getTotalBet()));
             }
         });
 
@@ -179,6 +182,7 @@ public class Chips extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 betlist.add(50);
+                player.setText(playername + ", Geld: " + (Data.spielerMap.get(whichPlayer).getGeld()-getTotalBet()));
             }
         });
 
@@ -186,6 +190,7 @@ public class Chips extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 betlist.add(100);
+                player.setText(playername + ", Geld: " + (Data.spielerMap.get(whichPlayer).getGeld()-getTotalBet()));
             }
         });
 
@@ -193,7 +198,7 @@ public class Chips extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 betlist.add(500);
-                System.out.println(betlist);
+                player.setText(playername + ", Geld: " + (Data.spielerMap.get(whichPlayer).getGeld()-getTotalBet()));
             }
         });
 
@@ -266,7 +271,7 @@ public class Chips extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(!betlist.isEmpty()) {
                     betlist.remove(betlist.size() - 1);
-                    System.out.println(betlist);
+                    player.setText(playername + ", Geld: " + (Data.spielerMap.get(whichPlayer).getGeld()-getTotalBet()));
                 }
             }
         });
