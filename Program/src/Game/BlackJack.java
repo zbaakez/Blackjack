@@ -230,7 +230,8 @@ public class BlackJack {
                     else
                         line = scanner.nextLine();
                     sb.append(line);
-                    sb.append("\n");
+                    if(scanner.hasNextLine())
+                        sb.append("\n");
                     x++;
                 }
 

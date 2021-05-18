@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Data;
 import Model.Model.*;
 import View.BlackjackMainMenu;
 import javafx.event.ActionEvent;
@@ -91,9 +92,10 @@ public class Controller {
             System.exit(0);
         }
         //handle btnStartGame
-        else if(clickedButton.equals(btnStartGame) && (Model.Data.valueMap.get("openStages") == 1 || Model.Data.valueMap.get("openstages") == 6)){
+        else if(!Data.getGameRunning() && clickedButton.equals(btnStartGame) && (Model.Data.valueMap.get("openStages") == 1 || Model.Data.valueMap.get("openstages") == 6)){
             //first login window for player pops out
             model.handleLoginWindow(0);
+
         }
         //call method that will open Spieleranzahl window
         else if(clickedButton.equals(btnSpieleranzahl) && Model.Data.valueMap.get("openStages") == 1)

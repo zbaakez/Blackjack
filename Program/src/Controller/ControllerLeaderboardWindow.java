@@ -83,7 +83,7 @@ public class ControllerLeaderboardWindow {
                 tableViewLeaderboard.getItems().add(leaderboardParticipant);
             }
             scanner.close();
-            decryptedFile.delete();
+            //decryptedFile.delete();
             //standardsort nach tablecolumn, tablecolumnname
             tableViewLeaderboard.getSortOrder().add(tableColumnGeld);
             tableViewLeaderboard.getSortOrder().add(tableColumnName);

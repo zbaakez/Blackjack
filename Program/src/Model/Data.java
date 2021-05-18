@@ -29,9 +29,18 @@ public class Data {
     public static void setCloseFrame(boolean closeFrame) {
         Data.closeFrame = closeFrame;
     }
-
-    //Hashmap that closes frame if true
+    //boolean that closes frame if true
     static private boolean closeFrame = false;
+
+    public static boolean getGameRunning() {
+        return gameRunning;
+    }
+    public static void setGameRunning(boolean gameRunning) {
+        Data.gameRunning = gameRunning;
+    }
+
+    //boolean that is true if game is running
+    static private boolean gameRunning = false;
 
 
     //saves how many guests are logged in
