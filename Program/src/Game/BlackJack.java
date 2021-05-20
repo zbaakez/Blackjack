@@ -256,15 +256,12 @@ public class BlackJack {
         }
 
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                ViewEndscreen viewEndscreen = new ViewEndscreen();
-                try {
-                    viewEndscreen.openEndScreen();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        Platform.runLater(() -> {
+            ViewEndscreen viewEndscreen = new ViewEndscreen();
+            try {
+                viewEndscreen.openEndScreen();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
 

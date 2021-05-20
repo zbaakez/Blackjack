@@ -5,6 +5,7 @@ import Model.CryptoException;
 import Model.Data;
 import Model.Spieler;
 import chips.Chips;
+import javafx.application.Platform;
 import org.w3c.dom.Text;
 
 import javax.imageio.ImageIO;
@@ -39,7 +40,8 @@ public class Frame  extends JFrame implements KeyListener {
         field.setBounds(0, 0, (int) size.getWidth(), (int) size.getHeight());
         this.setVisible(true);
         field.start();
-
+        field.addKeyListener(this);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         //now get the bet of all players!
         Chips[] chips = new Chips[Data.valueMap.get("spieler")];
         Data.valueMap.put("openStages", 2);
@@ -47,6 +49,7 @@ public class Frame  extends JFrame implements KeyListener {
             chips[i] = new Chips(Data.spielerMap.get(i).getSpielername(), i);
         }
     }
+
 
     public void startGame() {
 
@@ -217,18 +220,31 @@ public class Frame  extends JFrame implements KeyListener {
         }
     }
 
+
     @Override
     public void keyTyped(KeyEvent e) {
-        System.out.println("key typed");
-    }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        System.out.println("key pressed");
-    }
+        //handle ESC key
+        if((int)e.getKeyChar() == 27 && Data.valueMap.get("openStages") == 1) {
+            Platform.runLater(() -> {
+                ViewEscScreen viewEscScreen = new ViewEscScreen();
+                try {
+                    viewEscScreen.openEscScreen();
+                } catch (Exception e1) {
 
+                }
+            });
+
+        }
+
+        //handle alt f4 key
+
+    }
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("key released");
     }
+    @Override
+    public void keyPressed(KeyEvent e) {
+    }
+
 }

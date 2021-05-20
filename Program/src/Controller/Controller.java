@@ -396,7 +396,7 @@ public class Controller {
                             break;
                         }
                     }
-                    break;
+                    continue;
                 }
 
                 if (stateLogin!=3){

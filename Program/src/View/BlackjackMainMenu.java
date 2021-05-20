@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Controller;
 import Model.Data;
 import Model.Music;
 import javafx.animation.Animation;

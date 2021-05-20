@@ -12,15 +12,14 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.Objects;
 
-public class ViewEndscreen {
+public class ViewEscScreen {
+    public void openEscScreen() throws IOException {
 
-    public void openEndScreen() throws IOException {
         Data.valueMap.put("openStages", 2);
-        //lbl_zeile_kolonne lbl_0_0
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("endscreen.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("escScreen.fxml")));
         Stage stage = new Stage();
-        Scene scene = new Scene(root, Screen.getPrimary().getBounds().getMaxX()*0.4, Screen.getPrimary().getBounds().getMaxY()*0.5);
-        scene.getStylesheets().addAll(Objects.requireNonNull(this.getClass().getResource("endscreenStyle.css")).toExternalForm());
+        Scene scene = new Scene(root, 600, 150);
+        scene.getStylesheets().addAll(Objects.requireNonNull(this.getClass().getResource("escscreenStyle.css")).toExternalForm());
         stage.setScene(scene);
         stage.getIcons().add(new Image("/pictures/logosmallpng.png"));
         stage.setResizable(false);
@@ -29,5 +28,4 @@ public class ViewEndscreen {
         stage.show();
 
     }
-
 }
