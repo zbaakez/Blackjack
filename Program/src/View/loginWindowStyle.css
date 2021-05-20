@@ -1,0 +1,16 @@
+.root {
+    -fx-background-image: url("../pictures/blackjackgreen.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
+}
+.button{
+    -fx-background-color: yellow;
+    -fx-opacity: 0.9;
+}
+.button:hover {
+    -fx-background-color: orange;
+    -fx-opacity: 0.9;
+}
+.label{
+    -fx-text-fill: yellow;
+}

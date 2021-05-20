@@ -1,0 +1,32 @@
+.root {
+    -fx-background-image: url("../pictures/blackjackgreen.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
+}
+.button{
+    -fx-background-color: yellow;
+    -fx-opacity: 0.9;
+}
+.button:hover {
+    -fx-background-color: orange;
+    -fx-opacity: 0.9;
+}
+.table-view {
+    -fx-opacity: 0.8;
+    -fx-font-family: "Bodoni MT Black";
+    -fx-background-color: green;
+    -fx-font-size: 15;
+} /*disable change of cell on click*/
+.table-row-cell:filled:selected {
+    -fx-background: -fx-control-inner-background ;
+    -fx-background-color: -fx-table-cell-border-color, -fx-background ;
+    -fx-background-insets: 0, 0 0 1 0 ;
+    -fx-table-cell-border-color: derive(-fx-color, 5%);
+}
+.table-row-cell:odd:filled:selected {
+    -fx-background: -fx-control-inner-background-alt ;
+}
+#labelTitel{
+    -fx-text-fill: yellow;
+    -fx-opacity: 0.9;
+}
