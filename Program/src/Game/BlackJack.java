@@ -73,13 +73,16 @@ public class BlackJack {
             }
         }
         else if(action==Action.DOUBLE_DOWN){
-            Data.betMap.put(turnPlayer, Data.betMap.get(turnPlayer)*2);
-            players[turnPlayer].addCard(deck.draw());
-            if(getValue(players[turnPlayer])>=21){
-                notStanding.remove(players[turnPlayer]);
-            }
-            if(nextTurnPlayer()==false){
-                dealersTurn();
+            if(Data.spielerMap.get(turnPlayer).getGeld()*2 > Data.betMap.get(turnPlayer)){
+
+                Data.betMap.put(turnPlayer, Data.betMap.get(turnPlayer)*2);
+                players[turnPlayer].addCard(deck.draw());
+                if(getValue(players[turnPlayer])>=21){
+                    notStanding.remove(players[turnPlayer]);
+                }
+                if(nextTurnPlayer()==false){
+                    dealersTurn();
+                }
             }
         }
         else if(action==Action.SPLIT){
@@ -251,6 +254,8 @@ public class BlackJack {
             }
             ii++;
         }
+
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -262,7 +267,6 @@ public class BlackJack {
                 }
             }
         });
-
 
     }
 

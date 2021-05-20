@@ -23,7 +23,7 @@
          <padding>
             <Insets left="25.0" />
          </padding></Label>
-      <Button fx:id="btnAsGuest" maxHeight="45.0" maxWidth="280.0" minHeight="45.0" minWidth="280.0" mnemonicParsing="false" onAction="#loginWindowBtnClicked" prefHeight="45.0" prefWidth="280.0" text="als Gast spielen" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
+      <Button fx:id="btnAsGuest" maxHeight="45.0" maxWidth="280.0" minHeight="45.0" minWidth="280.0" mnemonicParsing="false" onAction="#loginWindowBtnClicked" prefHeight="45.0" prefWidth="280.0" text="Als Gast spielen" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets top="145.0" />
          </GridPane.margin>
