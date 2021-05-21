@@ -28,7 +28,7 @@ public class ControllerEndscreen {
                 if(Data.payoutMap.get(i) != null)
                     lbl_0_2.setText(String.valueOf(Data.payoutMap.get(i)));
                 else
-                    lbl_0_2.setText(String.valueOf(Data.payoutMap.get(i)));
+                    lbl_0_2.setText("0");
             }else if(i==1){
                 lbl_1_0.setText(Data.spielerMap.get(i).getSpielername());
                 if(Data.winMap.get(i) == 0)
@@ -40,7 +40,7 @@ public class ControllerEndscreen {
                 if(Data.payoutMap.get(i) != null)
                     lbl_1_2.setText(String.valueOf(Data.payoutMap.get(i)));
                 else
-                    lbl_1_2.setText(String.valueOf(Data.payoutMap.get(i)));
+                    lbl_1_2.setText("0");
             }else if(i==2){
                 lbl_2_0.setText(Data.spielerMap.get(i).getSpielername());
                 if(Data.winMap.get(i) == 0)
@@ -52,7 +52,7 @@ public class ControllerEndscreen {
                 if(Data.payoutMap.get(i) != null)
                     lbl_2_2.setText(String.valueOf(Data.payoutMap.get(i)));
                 else
-                    lbl_2_2.setText(String.valueOf(Data.payoutMap.get(i)));
+                    lbl_2_2.setText("0");
             }else if(i==3){
                 lbl_3_0.setText(Data.spielerMap.get(i).getSpielername());
                 if(Data.winMap.get(i) == 0)
@@ -64,7 +64,7 @@ public class ControllerEndscreen {
                 if(Data.payoutMap.get(i) != null)
                     lbl_3_2.setText(String.valueOf(Data.payoutMap.get(i)));
                 else
-                    lbl_3_2.setText(String.valueOf(Data.payoutMap.get(i)));
+                    lbl_3_2.setText("0");
             }else if(i==4){
                 lbl_4_0.setText(Data.spielerMap.get(i).getSpielername());
                 if(Data.winMap.get(i) == 0)
@@ -76,7 +76,7 @@ public class ControllerEndscreen {
                 if(Data.payoutMap.get(i) != null)
                     lbl_4_2.setText(String.valueOf(Data.payoutMap.get(i)));
                 else
-                    lbl_4_2.setText(String.valueOf(Data.payoutMap.get(i)));
+                    lbl_4_2.setText("0");
             }
         }
 
