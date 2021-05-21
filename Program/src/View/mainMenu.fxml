@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -26,6 +26,7 @@
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="30.0" prefHeight="60.0" vgrow="ALWAYS" />
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="30.0" prefHeight="60.0" vgrow="ALWAYS" />
           <RowConstraints maxHeight="1.7976931348623157E308" minHeight="30.0" prefHeight="60.0" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="30.0" prefHeight="60.0" vgrow="ALWAYS" />
             <RowConstraints maxHeight="30.0" minHeight="20.0" prefHeight="30.0" vgrow="ALWAYS" />
           <RowConstraints maxHeight="30.0" minHeight="20.0" prefHeight="30.0" vgrow="ALWAYS" />
             <RowConstraints maxHeight="30.0" minHeight="20.0" prefHeight="30.0" vgrow="ALWAYS" />
@@ -34,9 +35,9 @@
             <RowConstraints maxHeight="-Infinity" minHeight="20.0" prefHeight="60.0" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnLeaderboard" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" mnemonicParsing="false" onAction="#btnLeaderboardClicked" text="Leaderboard" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.rowSpan="2" GridPane.vgrow="ALWAYS">
+            <Button fx:id="btnLeaderboard" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" mnemonicParsing="false" onAction="#btnLeaderboardClicked" text="Leaderboard" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS">
                <GridPane.margin>
-                  <Insets bottom="10.0" left="100.0" right="100.0" top="10.0" />
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                </GridPane.margin>
                <font>
                   <Font name="Bodoni MT Black" size="18.0" />
@@ -82,7 +83,7 @@
                   <Font name="Bodoni MT Black" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnMute" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" mnemonicParsing="false" onAction="#buttonClicked" GridPane.columnIndex="2" GridPane.rowIndex="5" GridPane.rowSpan="2">
+            <Button fx:id="btnMute" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" mnemonicParsing="false" onAction="#buttonClicked" GridPane.columnIndex="2" GridPane.rowIndex="6" GridPane.rowSpan="2">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -90,13 +91,21 @@
                   <Insets bottom="10.0" left="150.0" right="5.0" top="10.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="btnExit" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" mnemonicParsing="false" onAction="#buttonClicked" text="Exit" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.rowSpan="2">
+            <Button fx:id="btnExit" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" mnemonicParsing="false" onAction="#buttonClicked" text="Exit" GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.rowSpan="2">
                <font>
                   <Font name="Bodoni MT Black" size="18.0" />
                </font>
                <GridPane.margin>
                   <Insets bottom="10.0" left="5.0" right="120.0" top="10.0" />
                </GridPane.margin>
+            </Button>
+            <Button fx:id="btnGamemode" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="40.0" mnemonicParsing="false" onAction="#buttonClicked" text="Gamemode" GridPane.columnIndex="2" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font name="Bodoni MT Black" size="18.0" />
+               </font>
             </Button>
          </children>
       </GridPane>

@@ -56,9 +56,10 @@ public class BlackJack {
     }
 
     public void action(Action action) throws IOException, CryptoException {
+        int maxPoints = Data.valueMap.get("maxPoints");
         if(action==Action.HIT){
             players[turnPlayer].addCard(deck.draw());
-            if(getValue(players[turnPlayer])>=21){
+            if(getValue(players[turnPlayer])>=maxPoints){
                 notStanding.remove(players[turnPlayer]);
             }
             if(nextTurnPlayer()==false){
@@ -77,7 +78,7 @@ public class BlackJack {
 
                 Data.betMap.put(turnPlayer, Data.betMap.get(turnPlayer)*2);
                 players[turnPlayer].addCard(deck.draw());
-                if(getValue(players[turnPlayer])>=21){
+                if(getValue(players[turnPlayer])>=maxPoints){
                     notStanding.remove(players[turnPlayer]);
                 }
                 if(nextTurnPlayer()==false){
@@ -143,17 +144,19 @@ public class BlackJack {
 
     public void checkWinner() throws CryptoException, IOException {
         int ii = 0;
+        int maxPoints = Data.valueMap.get("maxPoints");
         Data.valueMap.put("openStages", 2);
         int dealerValue = getValue(getDealer());
         int playerValue;
         int win;
+        Data.valueMap.put("dealerPoints", dealerValue);
         for(Player p : players){
             Data.winMap.put(ii,0);
             win=0;
             playerValue = getValue(p);
-            //first check if player is below or even on 21
-            if(playerValue <= 21){
-                if(playerValue==21 && dealerValue != 21){ //blackjack
+            //first check if player is below or even on maxPoints (21- Blackjack)
+            if(playerValue <= maxPoints){
+                if(playerValue==maxPoints && dealerValue != maxPoints){ //blackjack
                     //payout 1:2,5
                     if(Data.betMap.get(ii) != null)
                         Data.payoutMap.put(ii, (int)Math.round(Data.betMap.get(ii)*2.5));
@@ -171,11 +174,11 @@ public class BlackJack {
                     if(Data.betMap.get(ii) != null)
                         Data.payoutMap.put(ii, Data.betMap.get(ii));
                     Data.winMap.put(ii,2);
-                }else if(dealerValue>playerValue && dealerValue<=21){ // dealer wins
+                }else if(dealerValue>playerValue && dealerValue<=maxPoints){ // dealer wins
                     //payout none
                     if(Data.betMap.get(ii) != null)
                         Data.payoutMap.put(ii, 0);
-                }else if(dealerValue > 21){ // player wins
+                }else if(dealerValue > maxPoints){ // player wins
                     //payout 1:2
                     if(Data.betMap.get(ii) != null)
                         Data.payoutMap.put(ii, Data.betMap.get(ii)*2);
@@ -268,7 +271,8 @@ public class BlackJack {
     }
 
     public void dealersTurn() throws IOException, CryptoException {
-        while (getValue(getDealer())<17){
+        int maxPoints = Data.valueMap.get("maxPoints");
+        while (getValue(getDealer())<maxPoints-4){ // same as 21-4 == 17
             dealer.addCard(deck.draw());
         }
         checkWinner();

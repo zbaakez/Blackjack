@@ -50,8 +50,8 @@ public class BlackjackMainMenu extends Application  {
         primaryStage.setMaximized(true);
 
         //16:9
-        primaryStage.setMinHeight(465);
-        primaryStage.setMinWidth(670);
+        primaryStage.setMinHeight(510);
+        primaryStage.setMinWidth(906);
 
         primaryStage.getIcons().add(new Image("/pictures/logosmallpng.png"));
 

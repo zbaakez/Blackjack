@@ -79,6 +79,15 @@ public class Model {
     }
 
     /**
+     * calls Method in View class that opens gamemodeWindow
+     * @throws IOException
+     */
+    public void gamemodeBtnClicked() throws IOException{
+        view.openGamemodeWindow();
+    }
+
+
+    /**
      * safes data to HashMap "valueMap" in data
      * @param spielername as String
      * @param ID as Integer

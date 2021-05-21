@@ -1,7 +1,5 @@
 package Controller;
 
-import Model.Data;
-import Model.Model.*;
 import View.BlackjackMainMenu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +21,7 @@ import java.util.Scanner;
 public class Controller {
 
     @FXML
-    private Button btnMute, btnStartGame, btnSpieleranzahl, btnBotanzahl, btnSzene, btnRegeln, btnExit;
+    private Button btnMute, btnStartGame, btnSpieleranzahl, btnBotanzahl, btnSzene, btnRegeln, btnExit, btnGamemode;
 
     private final Model.Model model = new Model.Model();
 
@@ -45,8 +43,8 @@ public class Controller {
                 Model.Data.valueMap.put("spieler", 1); //spieleranzahl
                 Model.Data.valueMap.put("bot", 0); //botanzahl
                 Model.Data.valueMap.put("szene", 1); // 1 == Standard, 2 == Tirol, 3 == Strand, 4 == Normaler Tisch
-                Model.Data.valueMap.put("openStages", 1);
-                //1 Main Menu, 2 Main Menu and Spieleranzahl, 3 Main Menu and Botanzahl, 4 Main Menu and Szene, 5 Main Menu and Rules, 6 Login Windows, 7 Leaderboard
+                Model.Data.valueMap.put("openStages", 1); //1 Main Menu, 2 Main Menu and Spieleranzahl, 3 Main Menu and Botanzahl, 4 Main Menu and Szene, 5 Main Menu and Rules, 6 Login Windows, 7 Leaderboard
+                Model.Data.valueMap.put("maxPoints", 21);
             }
             Model.Data.setInit(true); //set init to true
             Model.Music.playMusic();
@@ -92,7 +90,7 @@ public class Controller {
             System.exit(0);
         }
         //handle btnStartGame
-        else if(!Data.getGameRunning() && clickedButton.equals(btnStartGame) && (Model.Data.valueMap.get("openStages") == 1 || Model.Data.valueMap.get("openstages") == 6)){
+        else if(!Model.Data.getGameRunning() && clickedButton.equals(btnStartGame) && (Model.Data.valueMap.get("openStages") == 1 || Model.Data.valueMap.get("openstages") == 6)){
             //first login window for player pops out
             model.handleLoginWindow(0);
 
@@ -109,6 +107,8 @@ public class Controller {
             //call method that will open Rule window
         else if(clickedButton.equals(btnRegeln) && Model.Data.valueMap.get("openStages") == 1)
             model.regelnBtnClicked();
+        else if(clickedButton.equals(btnGamemode) && Model.Data.valueMap.get("openStages") == 1)
+            model.gamemodeBtnClicked();
 
     }
 

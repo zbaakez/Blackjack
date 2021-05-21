@@ -194,8 +194,7 @@ public class Frame  extends JFrame implements KeyListener {
     }
 
     public void setJButtons(JButton bt){
-        bt.setBackground(Color.YELLOW);
-        bt.setForeground(Color.BLACK);
+        changeButtonColorToScene(bt);
         bt.setFocusPainted(false);
         bt.setFont(new Font("BODONI MT BLACK", Font.BOLD, 40));
         bt.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -203,7 +202,7 @@ public class Frame  extends JFrame implements KeyListener {
                 bt.setBackground(Color.RED);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                bt.setBackground(Color.YELLOW);
+                changeButtonColorToScene(bt);
             }
         });
     }
@@ -245,6 +244,22 @@ public class Frame  extends JFrame implements KeyListener {
     }
     @Override
     public void keyPressed(KeyEvent e) {
+    }
+
+    private void changeButtonColorToScene(JButton bt){
+        if(scene==1){ // casino
+            bt.setBackground(Color.YELLOW);
+            bt.setForeground(Color.BLACK);
+        }else if(scene==2){ // tirol
+            bt.setBackground(Color.RED);
+            bt.setForeground(Color.BLACK);
+        }else if(scene==3){ // strand
+            bt.setBackground(Color.BLUE);
+            bt.setForeground(Color.BLACK);
+        }else if(scene==4){ // universum
+            bt.setBackground(Color.WHITE);
+            bt.setForeground(Color.BLACK);
+        }
     }
 
 }

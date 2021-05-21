@@ -12,9 +12,9 @@ import java.io.File;
 public class ControllerEndscreen {
 
     @FXML //lbl_zeile_kolonne lbl_0_0
-    private Label lbl_0_0, lbl_0_1, lbl_0_2, lbl_1_0, lbl_1_1, lbl_1_2, lbl_2_0, lbl_2_1, lbl_2_2, lbl_3_0, lbl_3_1, lbl_3_2, lbl_4_0, lbl_4_1, lbl_4_2;
-    private Label lbl;
+    private Label lbl_0_0, lbl_0_1, lbl_0_2, lbl_1_0, lbl_1_1, lbl_1_2, lbl_2_0, lbl_2_1, lbl_2_2, lbl_3_0, lbl_3_1, lbl_3_2, lbl_4_0, lbl_4_1, lbl_4_2, lblDealer;
     public void initialize(){
+        lblDealer.setText("Dealer value: " + Data.valueMap.get("dealerPoints"));
         //set values to labels
         for(int i = 0; i < Data.spielerMap.size(); i++){
             if(i==0){
@@ -73,7 +73,7 @@ public class ControllerEndscreen {
                     lbl_4_1.setText("Win");
                 else
                     lbl_4_1.setText("Draw");
-                if(Data.payoutMap.get(i) != null)
+                if(Data.payoutMap.get(i) != null) //payout map is "null" for bots
                     lbl_4_2.setText(String.valueOf(Data.payoutMap.get(i)));
                 else
                     lbl_4_2.setText("0");

@@ -131,5 +131,19 @@ public class View {
         stage.show();
     }
 
+    public void openGamemodeWindow() throws IOException {
+        Data.valueMap.put("openStages", 7);
+        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("gamemodeWindow.fxml"))));
+        Stage stage = new Stage();
+        Scene leaderboardScene = new Scene(root, 600, 400);
+        leaderboardScene.getStylesheets().addAll(Objects.requireNonNull(this.getClass().getResource("gamemodeWindowStyle.css")).toExternalForm());
+        stage.setScene(leaderboardScene);
+        stage.getIcons().add(new Image("/pictures/logosmallpng.png"));
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setAlwaysOnTop(true);
+        stage.show();
+    }
+
 }
 
