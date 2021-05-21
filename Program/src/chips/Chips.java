@@ -8,6 +8,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class Chips extends JFrame {
@@ -26,7 +28,6 @@ public class Chips extends JFrame {
 
     JLabel player;
 
-    final int ICONSIZE=200;
     private int bet=0;
     private ArrayList<Integer> betlist=new ArrayList<>();
 
@@ -40,14 +41,28 @@ public class Chips extends JFrame {
     Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
     int whichPlayer;
     Color colorPanel=new Color(2, 102, 47);
+    int playerNumber = Data.valueMap.get("spieler")+Data.valueMap.get("bot");
+    int iconSize =screenHeight;
     Timer t1;
 
     public Chips(String playername, int whichPlayer){
+
+        if(playerNumber==1)
+            iconSize/=7;
+        else if(playerNumber==2)
+            iconSize/=8;
+        else if(playerNumber==3)
+            iconSize/=9;
+        else if(playerNumber==4)
+            iconSize/=11;
+        else if(playerNumber==5)
+            iconSize/=12;
+
         this.playername=playername;
         this.whichPlayer = whichPlayer;
 
-        setSize(ICONSIZE*3,ICONSIZE*3);
-        setLocation(0,(int)screenHeight-ICONSIZE*3);
+        setSize(iconSize *3, iconSize *3);
+        setLocation(0,(int)screenHeight- iconSize *3);
 
         panel.setLayout(null);
         setIconPaths();
@@ -56,8 +71,8 @@ public class Chips extends JFrame {
 
         player=new JLabel(playername,SwingConstants.CENTER);
         player.setText(playername + ", Geld: " + Data.spielerMap.get(whichPlayer).getGeld());
-        player.setBounds(ICONSIZE*3/4,ICONSIZE*5/2,ICONSIZE*3/2,ICONSIZE/3);
-        player.setFont(new Font("Comic Sans",Font.BOLD,25));
+        player.setBounds(iconSize *3/4, iconSize *5/2, iconSize *3/2, iconSize /3);
+        player.setFont(new Font("Comic Sans",Font.BOLD, iconSize /7));
         player.setBorder(BorderFactory.createLineBorder(new Color(0, 54, 18),5));
         player.setForeground(Color.BLACK);
         panel.add(player);
@@ -76,36 +91,50 @@ public class Chips extends JFrame {
         add(panel);
 
         setUndecorated(true);
-        //setResizable(false);
         setVisible(true);
         setAlwaysOnTop(true);
         validate();
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                Data.valueMap.put("openStages", 1);
+                e.getWindow().dispose();
+            }
+        });
 
+    }
+
+    private static Icon resizeIcon(ImageIcon icon, int resizedWidth, int resizedHeight) {
+        Image img = icon.getImage();
+        Image resizedImage = img.getScaledInstance(resizedWidth, resizedHeight,  java.awt.Image.SCALE_SMOOTH);
+        return new ImageIcon(resizedImage);
     }
 
     private void setIconPaths(){
         ImageIcon image=new ImageIcon("src/pngchips/image_1_1 (1).png");
-        btn1.setIcon(createIcon(image));
+        btn1.setIcon(resizeIcon(createIcon(image), iconSize, iconSize));
         btn1.setBackground(colorPanel);
 
         image=new ImageIcon("src/pngchips/image_1_2 (1).png");
-        btn2.setIcon(createIcon(image));
+        btn2.setIcon(resizeIcon(createIcon(image), iconSize, iconSize));
         btn2.setBackground(colorPanel);
 
         image=new ImageIcon("src/pngchips/image_1_3.png");
-        btn3.setIcon(createIcon(image));
+        btn3.setIcon(resizeIcon(createIcon(image), iconSize, iconSize));
         btn3.setBackground(colorPanel);
 
         image=new ImageIcon("src/pngchips/image_2_1.png");
-        btn4.setIcon(createIcon(image));
+        btn4.setIcon(resizeIcon(createIcon(image), iconSize, iconSize));
         btn4.setBackground(colorPanel);
 
         image=new ImageIcon("src/pngchips/image_2_2.png");
-        btn5.setIcon(createIcon(image));
+        btn5.setIcon(resizeIcon(createIcon(image), iconSize, iconSize));
         btn5.setBackground(colorPanel);
 
         image=new ImageIcon("src/pngchips/image_2_3_prev_ui.png");
-        btn6.setIcon(createIcon(image));
+        btn6.setIcon(resizeIcon(createIcon(image), iconSize, iconSize));
         btn6.setBackground(colorPanel);
     }
 
@@ -136,13 +165,13 @@ public class Chips extends JFrame {
         int x = 0;
         int y = 0;
 
-        btnlist.get(0).setBounds(0, 0, ICONSIZE, ICONSIZE);
+        btnlist.get(0).setBounds(0, 0, iconSize, iconSize);
         panel.add(btnlist.get(0));
 
         for (int i = 0; i < btnlist.size(); i++) {
             panel.add(btnlist.get(i));
             btnlist.get(i).setBorder(emptyBorder);
-            btnlist.get(i).setBounds(x, y, ICONSIZE, ICONSIZE);
+            btnlist.get(i).setBounds(x, y, iconSize, iconSize);
             x += btnlist.get(i).getWidth();
             if (i == 2) {
                 y = btnlist.get(i).getHeight();
@@ -206,12 +235,12 @@ public class Chips extends JFrame {
 
     private void placeOkbtn(){
 
-        ok.setBounds(ICONSIZE,ICONSIZE*2,ICONSIZE,ICONSIZE/3);
+        ok.setBounds(iconSize, iconSize *2, iconSize, iconSize /3);
         ok.setAlignmentX(Component.CENTER_ALIGNMENT);
         ok.setBackground(Color.GREEN);
         ok.setForeground(Color.BLACK);
         ok.setFocusable(false);
-        ok.setFont(new Font("Comic Sans",Font.BOLD,25));
+        ok.setFont(new Font("Comic Sans",Font.BOLD, iconSize /7));
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -235,11 +264,11 @@ public class Chips extends JFrame {
         });
         panel.add(ok);
 
-        allin.setBounds(ICONSIZE*2,ICONSIZE*2,ICONSIZE,ICONSIZE/3);
+        allin.setBounds(iconSize *2, iconSize *2, iconSize, iconSize /3);
         allin.setAlignmentX(Component.CENTER_ALIGNMENT);
         allin.setBackground(Color.GREEN);
         allin.setForeground(Color.BLACK);
-        allin.setFont(new Font("Comic Sans",Font.BOLD,25));
+        allin.setFont(new Font("Comic Sans",Font.BOLD, iconSize /7));
         allin.setFocusable(false);
         allin.addActionListener(new ActionListener() {
             @Override
@@ -260,11 +289,11 @@ public class Chips extends JFrame {
         });
         panel.add(allin);
 
-        reduce.setBounds(0,ICONSIZE*2,ICONSIZE,ICONSIZE/3);
+        reduce.setBounds(0, iconSize *2, iconSize, iconSize /3);
         reduce.setAlignmentX(Component.CENTER_ALIGNMENT);
         reduce.setBackground(Color.GREEN);
         reduce.setForeground(Color.BLACK);
-        reduce.setFont(new Font("Comic Sans",Font.BOLD,25));
+        reduce.setFont(new Font("Comic Sans",Font.BOLD, iconSize /7));
         reduce.setFocusable(false);
         reduce.addActionListener(new ActionListener() {
             @Override
@@ -282,7 +311,7 @@ public class Chips extends JFrame {
     private ImageIcon createIcon(ImageIcon imgicon){
 
         Image img=imgicon.getImage();
-        Image newimg=img.getScaledInstance(ICONSIZE,ICONSIZE,Image.SCALE_SMOOTH);
+        Image newimg=img.getScaledInstance(iconSize, iconSize,Image.SCALE_SMOOTH);
         ImageIcon newIcon=new ImageIcon(newimg);
         return newIcon;
     }
@@ -295,4 +324,3 @@ public class Chips extends JFrame {
     }
 
 }
-

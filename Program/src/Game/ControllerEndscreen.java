@@ -92,6 +92,7 @@ public class ControllerEndscreen {
         System.exit(0);
     }
     public void handleMainMenuBtn() throws Exception {
+        Data.guestAnzahl=1;
         Data.setGameRunning(false);
         Data.setCloseFrame(true);
         for(int i =0; i<Data.betMap.size(); i++){

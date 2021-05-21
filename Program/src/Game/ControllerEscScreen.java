@@ -58,6 +58,7 @@ public class ControllerEscScreen {
         stage.close(); //Stage szene gets closed after a button is clicked
     }
     public void handleMainMenuBtn() throws Exception {
+        Data.guestAnzahl=1;
 
         //remove bet from money of player so you cant cheat with leaving game if you loose
         //now safe to csv
@@ -135,6 +136,5 @@ public class ControllerEscScreen {
             decryptedFile.delete();
         }
     }
-
 
 }
