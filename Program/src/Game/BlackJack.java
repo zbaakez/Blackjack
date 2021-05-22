@@ -30,18 +30,20 @@ public class BlackJack {
     private Deck deck = new Deck();
     private int turnPlayer=0;
     private int bets;
+    Frame frame;
 
     public int getTurnPlayer(){
         return turnPlayer;
     }
 
-    public BlackJack(int numberOfPlayers) {
+    public BlackJack(int numberOfPlayers, Frame frame) {
         this.players = new Player[numberOfPlayers];
         for(int i=0;i<numberOfPlayers;i++){
-            Player player = new Player(i);
+            Player player = new Player(i, this);
             players[i] = player;
         }
-        this.dealer=new Player(-1);
+        this.dealer=new Player(-1, this);
+        this.frame=frame;
     }
 
     public void start(){
@@ -53,6 +55,12 @@ public class BlackJack {
         }
         dealer.resetHand();
         dealer.addCard(deck.draw());
+
+
+        players[0].resetHand();
+        players[0].addCard(new Card(0 , 0));
+        players[0].addCard(new Card(0 , 0));
+
     }
 
     public void action(Action action) throws IOException, CryptoException {
@@ -87,7 +95,24 @@ public class BlackJack {
             }
         }
         else if(action==Action.SPLIT){
+            if(!players[turnPlayer].canSplit()){
+                return;
+            }
+            Player player = players[turnPlayer].split();
+            Player[] players1 = new Player[players.length+1];
+            int foundTurnPlayer=0;
+            for(int i=0;i<players.length;i++){
+                players1[i+foundTurnPlayer]=players[i];
+                if(i==turnPlayer){
+                    players1[i+1]=player;
+                    foundTurnPlayer=1;
+                }
 
+            }
+            players=players1;
+            frame.deleteTextfields();
+            frame.setTextfields();
+            notStanding.add(player);
         }
 
     }
@@ -136,6 +161,10 @@ public class BlackJack {
             }
         }
         return value;
+    }
+
+    public Deck getDeck(){
+        return deck;
     }
 
     public Player[] getPlayers() {

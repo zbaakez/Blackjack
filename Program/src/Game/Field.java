@@ -16,9 +16,9 @@ import java.io.IOException;
 public class Field extends Canvas {
     private int players;
     private CardImages cardImages = new CardImages();
-    private BlackJack blackjack = new BlackJack(Data.valueMap.get("spieler")+Data.valueMap.get("bot"));
-
     private Frame frame;
+    private BlackJack blackjack;
+
     private int value = 0;
     private Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
     private int width = (int) size.getWidth();
@@ -48,6 +48,7 @@ public class Field extends Canvas {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.blackjack=new BlackJack(Data.valueMap.get("spieler")+Data.valueMap.get("bot"), frame);
 
     }
 
@@ -75,7 +76,9 @@ public class Field extends Canvas {
                 closer = Data.getCloseFrame();
                 try {
                     closer = Data.getCloseFrame();
-                    Thread.sleep(100);
+                    do {
+                        Thread.sleep(10);
+                    } while(!frame.isDrawReady());
                     closer = Data.getCloseFrame();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -93,7 +96,7 @@ public class Field extends Canvas {
             int count=0;
             Player p = blackjack.getPlayers()[i];
             for (int j=0;j<p.getHand().size();j++){
-                drawCard(getXPos(p.getId())+count, getYPos(p.getId()), p.getHand().get(j), g);
+                drawCard(getXPos(i)+count, getYPos(i), p.getHand().get(j), g);
                 count+=40;
             }
         }

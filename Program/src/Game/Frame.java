@@ -26,6 +26,7 @@ public class Frame  extends JFrame implements KeyListener {
     private Label[] textfieldsPlayername = new Label[field.getBlackjack().getPlayers().length];
     private Label[] textfieldsPoints = new Label[field.getBlackjack().getPlayers().length];
     private Label[] textfieldsWager = new Label[field.getBlackjack().getPlayers().length];
+    private boolean drawReady=false;
 
     public Frame() throws IOException {
         //this.scene=scene;
@@ -36,7 +37,6 @@ public class Frame  extends JFrame implements KeyListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setButtons();
         setTextfields();
-        this.add(field);
         field.setBounds(0, 0, (int) size.getWidth(), (int) size.getHeight());
         this.setVisible(true);
         field.start();
@@ -50,10 +50,22 @@ public class Frame  extends JFrame implements KeyListener {
         }
     }
 
+    public void startGame(){
 
-    public void startGame() {
+    }
 
+    public void deleteTextfields(){
+        for (int o = 0; o < field.getBlackjack().getPlayers().length-1; o++) {
+            this.remove(textfieldsPlayername[o]);
+            this.remove(textfieldsPoints[o]);
+            this.remove(textfieldsWager[o]);
+        }
 
+        textfieldsPlayername = new Label[field.getBlackjack().getPlayers().length];
+        textfieldsPoints = new Label[field.getBlackjack().getPlayers().length];
+        textfieldsWager = new Label[field.getBlackjack().getPlayers().length];
+        drawReady=false;
+        this.remove(field);
     }
 
     public void setTextfields() {
@@ -62,11 +74,11 @@ public class Frame  extends JFrame implements KeyListener {
             textfieldsPlayername[i] = new Label();
             textfieldsPoints[i] = new Label();
             textfieldsWager[i] = new Label();
-            if(!Data.spielerMap.containsKey(i)){
+            if(!Data.spielerMap.containsKey(field.getBlackjack().getPlayers()[i].getId())){
                 Spieler spieler = new Spieler("bot"+String.valueOf(i-Data.valueMap.get("spieler")+1), i, 0, 0, 9999999); // bot has unlimited money
                 Data.spielerMap.put(i, spieler);
             }
-            textfieldsPlayername[i].setText(Data.spielerMap.get(i).getSpielername());
+            textfieldsPlayername[i].setText(Data.spielerMap.get(field.getBlackjack().getPlayers()[i].getId()).getSpielername());
             textfieldsWager[i].setText("Einsatz!"); // put variable for input here
         }
 
@@ -85,7 +97,15 @@ public class Frame  extends JFrame implements KeyListener {
             this.add(textfieldsPoints[o]);
             this.add(textfieldsWager[o]);
         }
+        this.add(field);
+        drawReady=true;
 
+
+    }
+
+
+    public boolean isDrawReady() {
+        return drawReady;
     }
 
     public void setValueToTextfields(int turn) {

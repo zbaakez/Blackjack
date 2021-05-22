@@ -1,11 +1,15 @@
 package Game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Deck {
 
     private List<Card> cards = new ArrayList<>();
+
+
+
 
     public Deck() {
         for(int c=0;c<6;c++){
@@ -16,6 +20,10 @@ public class Deck {
                 }
             }
         }
+        Collections.shuffle(cards);
+        Collections.shuffle(cards);
+        Collections.shuffle(cards);
+        Collections.shuffle(cards);
     }
     public Card draw(){
         Card card = cards.get(0);
