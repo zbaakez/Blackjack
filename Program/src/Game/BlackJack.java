@@ -116,6 +116,11 @@ public class BlackJack {
             }
             players=players1;
             frame.deleteTextfields();
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             frame.setTextfields();
             notStanding.add(player);
         }

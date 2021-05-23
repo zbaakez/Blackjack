@@ -48,6 +48,8 @@ public class Field extends Canvas {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        frame.setResizable(false);
+        frame.getContentPane().add(this); // NEW
         this.blackjack=new BlackJack(Data.valueMap.get("spieler")+Data.valueMap.get("bot"), frame);
 
     }
@@ -56,40 +58,37 @@ public class Field extends Canvas {
 
 
         thread = new Thread(()-> {
-            int x=0;
             boolean closer = false;
             while(true) {
-                x++;
                 if(Data.getCloseFrame() || closer) {
                     frame.dispose();
                     Data.setCloseFrame(false);
                     break;
                 }
-
-                BufferStrategy bs = this.getBufferStrategy();
-                if (bs == null) {
-                    createBufferStrategy(3);
-                    continue;
-                }
-
-                Graphics g = bs.getDrawGraphics();
-                draw(g);
-
-
-                g.dispose();
-                bs.show();
-                uiUpdate();
                 try {
-                    closer = Data.getCloseFrame();
+                    BufferStrategy bs = this.getBufferStrategy();
+                    if (bs == null) {
+                        createBufferStrategy(2);
+                        continue;
+                    }
+
+                    Graphics g = bs.getDrawGraphics();
+                    draw(g);
+
+
+                    g.dispose();
+                    bs.show();
+                    uiUpdate();
+                }catch (IllegalStateException e){
+                    
+                }
+                try {
                     do {
                         Thread.sleep(10);
                     } while(!frame.isDrawReady());
-                    closer = Data.getCloseFrame();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if(x<10)
-                    uiUpdate();
 
                 closer = Data.getCloseFrame();
             }
