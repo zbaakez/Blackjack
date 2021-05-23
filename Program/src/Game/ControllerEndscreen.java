@@ -23,8 +23,6 @@ public class ControllerEndscreen {
     private Label lbl_0_0, lbl_0_1, lbl_0_2, lbl_1_0, lbl_1_1, lbl_1_2, lbl_2_0, lbl_2_1, lbl_2_2, lbl_3_0, lbl_3_1, lbl_3_2, lbl_4_0, lbl_4_1, lbl_4_2, lblDealer;
     public void initialize() throws CryptoException, IOException {
 
-        System.out.println(Data.spielerMap.size());
-
         lbl_0_0.setText("");
         lbl_0_1.setText("");
         lbl_0_2.setText("");
@@ -47,7 +45,6 @@ public class ControllerEndscreen {
         int safeSecondPlayer=-1;
         int players = Data.valueMap.get("spieler")+ Data.valueMap.get("bot");
         //set values to labels
-        System.out.println(Data.numberPlayers);
         for(int i = 0; i < Data.spielerMap.size(); i++){
             if(i>=Data.numberPlayers)
                 break;
@@ -120,7 +117,6 @@ public class ControllerEndscreen {
                 else
                     lbl_4_2.setText("0");
             }
-            System.out.println(Data.valueMap.get("spieler")+Data.valueMap.get("bot"));
             if(i==0){
                 lbl_0_0.setText(Data.spielerMap.get(i).getSpielername());
                 if(Data.winMap.get(i) == 0)
@@ -285,18 +281,22 @@ public class ControllerEndscreen {
         Data.setGameRunning(false);
         Data.setCloseFrame(true);
         for(int i =0; i<Data.betMap.size(); i++){
-            Data.spielerMap.remove(i);
             Data.payoutMap.remove(i);
             Data.winMap.remove(i);
+        }
+        for(int i = 0; i<=Data.spielerMap.size(); i++ ){
+            Data.spielerMap.remove(i);
         }
         for(int i =0; i<Data.betMap.size(); i++){
             Data.betMap.put(i,0);
         }
+
         JavaFXInitializer fx = new JavaFXInitializer();
         fx.start(new Stage());
         Data.valueMap.put("openStages", 1);
         Stage stage = (Stage) btnExit.getScene().getWindow();
         stage.close(); //Stage szene gets closed after a button is clicked
+
     }
     public void handleRestartBtn() throws Exception {
         Data.setCloseFrame(true);

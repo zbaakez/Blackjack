@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Data;
 import View.BlackjackMainMenu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -91,6 +92,9 @@ public class Controller {
         }
         //handle btnStartGame
         else if(!Model.Data.getGameRunning() && clickedButton.equals(btnStartGame) && (Model.Data.valueMap.get("openStages") == 1 || Model.Data.valueMap.get("openstages") == 6)){
+            for(int i = 0; i<=Data.spielerMap.size(); i++ ){
+                Data.spielerMap.remove(i);
+            }
             //first login window for player pops out
             model.handleLoginWindow(0);
 
@@ -456,8 +460,11 @@ public class Controller {
         if(worked) {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close(); //Stage szene gets closed after button is clicked
-	    if(Model.Data.valueMap.get("spieler") == spieler) // all players logged in, game can be started
+	        if(Model.Data.valueMap.get("spieler") == spieler) { // all players logged in, game can be started
+	            //for(int i = 0; i< Data.spielerMap.size(); i++)
+                  //  System.out.println("h  " + Data.spielerMap.get(i).getSpielername());
                 model.startGameBtnClicked();
+            }
         }
     }
 
