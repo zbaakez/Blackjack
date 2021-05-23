@@ -41,7 +41,8 @@ public class Frame  extends JFrame implements KeyListener {
         this.setVisible(true);
         field.start();
         field.addKeyListener(this);
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+       // handle alt f4
+        // this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         //now get the bet of all players!
         Chips[] chips = new Chips[Data.valueMap.get("spieler")];
         Data.valueMap.put("openStages", 2);
@@ -108,8 +109,7 @@ public class Frame  extends JFrame implements KeyListener {
         return drawReady;
     }
 
-    public void setValueToTextfields(int turn) {
-
+    public void setValueToTextfields() {
         for (int i = 0; i < Data.numberPlayers; i++) {
             if (Data.betMap.get(i) != null)
                 textfieldsWager[i].setText(String.valueOf(Data.betMap.get(i)));
@@ -165,7 +165,7 @@ public class Frame  extends JFrame implements KeyListener {
                     } catch (CryptoException cryptoException) {
                         cryptoException.printStackTrace();
                     }
-                    setValueToTextfields(turn);
+                    setValueToTextfields();
                 }
             }
         });
@@ -180,7 +180,7 @@ public class Frame  extends JFrame implements KeyListener {
                     } catch (CryptoException cryptoException) {
                         cryptoException.printStackTrace();
                     }
-                    setValueToTextfields(turn);
+                    setValueToTextfields();
                 }
             }
         });
@@ -195,7 +195,7 @@ public class Frame  extends JFrame implements KeyListener {
                     } catch (CryptoException cryptoException) {
                         cryptoException.printStackTrace();
                     }
-                    setValueToTextfields(turn);
+                    setValueToTextfields();
                 }
             }
         });
@@ -210,7 +210,7 @@ public class Frame  extends JFrame implements KeyListener {
                     } catch (CryptoException cryptoException) {
                         cryptoException.printStackTrace();
                     }
-                    setValueToTextfields(turn);
+                    setValueToTextfields();
                 }
             }
         });
@@ -259,8 +259,6 @@ public class Frame  extends JFrame implements KeyListener {
             });
 
         }
-
-        //handle alt f4 key
 
     }
     @Override

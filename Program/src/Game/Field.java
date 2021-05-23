@@ -100,14 +100,6 @@ public class Field extends Canvas {
         blackjack.start();
     }
 
-    void bf(){
-        BufferStrategy bs = this.getBufferStrategy();;
-        if(bs == null) {
-            createBufferStrategy(3);
-            return;
-        }
-    }
-
     public void draw(Graphics g){
         g.drawImage(background, 0, 0, scaleX(originalWidth), scaleY(originalHeight), null);
         for(int i=0;i<blackjack.getPlayers().length;i++){
@@ -127,7 +119,7 @@ public class Field extends Canvas {
     }
 
     public void uiUpdate(){
-        frame.setValueToTextfields(blackjack.getTurnPlayer());
+        frame.setValueToTextfields();
     }
 
     public void drawCard(int x, int y, Card card, Graphics g){
