@@ -68,7 +68,7 @@ public class Field extends Canvas {
                 try {
                     BufferStrategy bs = this.getBufferStrategy();
                     if (bs == null) {
-                        createBufferStrategy(2);
+                        createBufferStrategy(3);
                         continue;
                     }
 
@@ -80,7 +80,7 @@ public class Field extends Canvas {
                     bs.show();
                     uiUpdate();
                 }catch (IllegalStateException e){
-                    
+
                 }
                 try {
                     do {
