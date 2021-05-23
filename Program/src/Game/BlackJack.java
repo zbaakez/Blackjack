@@ -102,7 +102,7 @@ public class BlackJack {
             Player player = players[turnPlayer].split();
             Spieler spieler = new Spieler(Data.spielerMap.get(turnPlayer).getSpielername(), Data.spielerMap.get(turnPlayer).getID(),Data.spielerMap.get(turnPlayer).getSpieleAnzahl(), Data.spielerMap.get(turnPlayer).getSiegeAnzahl(),Data.spielerMap.get(turnPlayer).getGeld());
             Data.spielerMap.put(Data.spielerMap.size(),spieler);
-            Data.betMap.put(Data.betMap.size(), Data.betMap.get(turnPlayer));
+            Data.betMap.put(Data.numberPlayers-1, Data.betMap.get(turnPlayer));
 
             Player[] players1 = new Player[players.length+1];
             int foundTurnPlayer=0;
