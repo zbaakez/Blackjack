@@ -78,7 +78,7 @@ public class Field extends Canvas {
 
                 g.dispose();
                 bs.show();
-
+                uiUpdate();
                 try {
                     closer = Data.getCloseFrame();
                     do {

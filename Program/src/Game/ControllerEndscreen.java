@@ -11,17 +11,40 @@ import java.io.File;
 
 public class ControllerEndscreen {
 
+
+    private String[] name = new String[Data.spielerMap.size()];
     @FXML //lbl_zeile_kolonne lbl_0_0
     private Label lbl_0_0, lbl_0_1, lbl_0_2, lbl_1_0, lbl_1_1, lbl_1_2, lbl_2_0, lbl_2_1, lbl_2_2, lbl_3_0, lbl_3_1, lbl_3_2, lbl_4_0, lbl_4_1, lbl_4_2, lblDealer;
     public void initialize(){
 
-        String[] name = new String[Data.spielerMap.size()];
+        System.out.println(Data.spielerMap.size());
+
+        lbl_0_0.setText("");
+        lbl_0_1.setText("");
+        lbl_0_2.setText("");
+        lbl_1_0.setText("");
+        lbl_1_1.setText("");
+        lbl_1_2.setText("");
+        lbl_2_0.setText("");
+        lbl_2_1.setText("");
+        lbl_2_2.setText("");
+        lbl_3_0.setText("");
+        lbl_3_1.setText("");
+        lbl_3_2.setText("");
+        lbl_4_0.setText("");
+        lbl_4_1.setText("");
+        lbl_4_2.setText("");
+
+
         lblDealer.setText("Dealer value: " + Data.valueMap.get("dealerPoints"));
         int playerIn = -1;
         int safeSecondPlayer=-1;
         int players = Data.valueMap.get("spieler")+ Data.valueMap.get("bot");
         //set values to labels
+        System.out.println(Data.numberPlayers);
         for(int i = 0; i < Data.spielerMap.size(); i++){
+            if(i>=Data.numberPlayers)
+                break;
             playerIn=-1;
             safeSecondPlayer=-1;
             //safe spielername to an array (useful if splitted)
@@ -29,7 +52,7 @@ public class ControllerEndscreen {
 
             //check if array contains the name already
             for(int x = 0; x<players; x++){
-                if(name[i].equals(name[x]) && i!=x){
+                if(name[i].equals(name[x]) && i!=x && i!=0 && i<Data.numberPlayers){
                     playerIn=x;
                     safeSecondPlayer=i;
                 }
@@ -42,17 +65,35 @@ public class ControllerEndscreen {
                 else
                     lbl_0_2.setText("0");
             }else if(playerIn==1) {
-
+                lbl_1_0.setText(Data.spielerMap.get(i).getSpielername());
+                lbl_1_1.setText("Split");
+                if(Data.payoutMap.get(i) != null)
+                    lbl_1_2.setText(String.valueOf(Integer.valueOf(lbl_1_2.getText()) + Data.payoutMap.get(safeSecondPlayer)));
+                else
+                    lbl_1_2.setText("0");
             }else if(playerIn==2) {
-
+                lbl_2_0.setText(Data.spielerMap.get(i).getSpielername());
+                lbl_2_1.setText("Split");
+                if(Data.payoutMap.get(i) != null)
+                    lbl_2_2.setText(String.valueOf(Integer.valueOf(lbl_2_2.getText()) + Data.payoutMap.get(safeSecondPlayer)));
+                else
+                    lbl_2_2.setText("0");
+            } else if(playerIn==3) {
+                lbl_3_0.setText(Data.spielerMap.get(i).getSpielername());
+                lbl_3_1.setText("Split");
+                if(Data.payoutMap.get(i) != null)
+                    lbl_3_2.setText(String.valueOf(Integer.valueOf(lbl_3_2.getText()) + Data.payoutMap.get(safeSecondPlayer)));
+                else
+                    lbl_3_2.setText("0");
+            }else if(playerIn==4) {
+                lbl_4_0.setText(Data.spielerMap.get(i).getSpielername());
+                lbl_4_1.setText("Split");
+                if(Data.payoutMap.get(i) != null)
+                    lbl_4_2.setText(String.valueOf(Integer.valueOf(lbl_4_2.getText()) + Data.payoutMap.get(safeSecondPlayer)));
+                else
+                    lbl_4_2.setText("0");
             }
-            else if(playerIn==3) {
-
-            }
-
-            System.out.println("hi" + playerIn);
-
-            System.out.println(Data.payoutMap.get(i));
+            System.out.println(Data.valueMap.get("spieler")+Data.valueMap.get("bot"));
             if(i==0){
                 lbl_0_0.setText(Data.spielerMap.get(i).getSpielername());
                 if(Data.winMap.get(i) == 0)
@@ -65,7 +106,7 @@ public class ControllerEndscreen {
                     lbl_0_2.setText(String.valueOf(Data.payoutMap.get(i)));
                 else
                     lbl_0_2.setText("0");
-            }else if(i==1){
+            }else if(i==1 && i+1<=Data.valueMap.get("spieler")+Data.valueMap.get("bot")){
                 lbl_1_0.setText(Data.spielerMap.get(i).getSpielername());
                 if(Data.winMap.get(i) == 0)
                     lbl_1_1.setText("Loose");
@@ -77,7 +118,7 @@ public class ControllerEndscreen {
                     lbl_1_2.setText(String.valueOf(Data.payoutMap.get(i)));
                 else
                     lbl_1_2.setText("0");
-            }else if(i==2){
+            }else if(i==2 && i+1<=Data.valueMap.get("spieler")+Data.valueMap.get("bot")){
                 lbl_2_0.setText(Data.spielerMap.get(i).getSpielername());
                 if(Data.winMap.get(i) == 0)
                     lbl_2_1.setText("Loose");
@@ -89,7 +130,7 @@ public class ControllerEndscreen {
                     lbl_2_2.setText(String.valueOf(Data.payoutMap.get(i)));
                 else
                     lbl_2_2.setText("0");
-            }else if(i==3){
+            }else if(i==3 && i+1<=Data.valueMap.get("spieler")+Data.valueMap.get("bot")){
                 lbl_3_0.setText(Data.spielerMap.get(i).getSpielername());
                 if(Data.winMap.get(i) == 0)
                     lbl_3_1.setText("Loose");
@@ -101,7 +142,7 @@ public class ControllerEndscreen {
                     lbl_3_2.setText(String.valueOf(Data.payoutMap.get(i)));
                 else
                     lbl_3_2.setText("0");
-            }else if(i==4){
+            }else if(i==4 && i+1<=Data.valueMap.get("spieler")+Data.valueMap.get("bot")){
                 lbl_4_0.setText(Data.spielerMap.get(i).getSpielername());
                 if(Data.winMap.get(i) == 0)
                     lbl_4_1.setText("Loose");
@@ -113,6 +154,11 @@ public class ControllerEndscreen {
                     lbl_4_2.setText(String.valueOf(Data.payoutMap.get(i)));
                 else
                     lbl_4_2.setText("0");
+            }
+        }
+        for(int i = 0; i<Data.spielerMap.size(); i++){
+            if(i>Data.valueMap.get("spieler")+Data.valueMap.get("bot")){
+                Data.spielerMap.remove(i);
             }
         }
 
