@@ -14,9 +14,45 @@ public class ControllerEndscreen {
     @FXML //lbl_zeile_kolonne lbl_0_0
     private Label lbl_0_0, lbl_0_1, lbl_0_2, lbl_1_0, lbl_1_1, lbl_1_2, lbl_2_0, lbl_2_1, lbl_2_2, lbl_3_0, lbl_3_1, lbl_3_2, lbl_4_0, lbl_4_1, lbl_4_2, lblDealer;
     public void initialize(){
+
+        String[] name = new String[Data.spielerMap.size()];
         lblDealer.setText("Dealer value: " + Data.valueMap.get("dealerPoints"));
+        int playerIn = -1;
+        int safeSecondPlayer=-1;
+        int players = Data.valueMap.get("spieler")+ Data.valueMap.get("bot");
         //set values to labels
         for(int i = 0; i < Data.spielerMap.size(); i++){
+            playerIn=-1;
+            safeSecondPlayer=-1;
+            //safe spielername to an array (useful if splitted)
+            name[i] = Data.spielerMap.get(i).getSpielername();
+
+            //check if array contains the name already
+            for(int x = 0; x<players; x++){
+                if(name[i].equals(name[x]) && i!=x){
+                    playerIn=x;
+                    safeSecondPlayer=i;
+                }
+            }
+            if(playerIn==0){
+                lbl_0_0.setText(Data.spielerMap.get(i).getSpielername());
+                lbl_0_1.setText("Split");
+                if(Data.payoutMap.get(i) != null)
+                    lbl_0_2.setText(String.valueOf(Integer.valueOf(lbl_0_2.getText()) + Data.payoutMap.get(safeSecondPlayer)));
+                else
+                    lbl_0_2.setText("0");
+            }else if(playerIn==1) {
+
+            }else if(playerIn==2) {
+
+            }
+            else if(playerIn==3) {
+
+            }
+
+            System.out.println("hi" + playerIn);
+
+            System.out.println(Data.payoutMap.get(i));
             if(i==0){
                 lbl_0_0.setText(Data.spielerMap.get(i).getSpielername());
                 if(Data.winMap.get(i) == 0)
@@ -110,6 +146,12 @@ public class ControllerEndscreen {
         stage.close(); //Stage szene gets closed after a button is clicked
     }
     public void handleRestartBtn() throws Exception {
+        for(int i = 0; i<Data.spielerMap.size(); i++){
+            if(i>Data.valueMap.get("spieler")+Data.valueMap.get("bot")){
+                Data.spielerMap.remove(i);
+            }
+        }
+        Data.numberPlayers=Data.valueMap.get("spieler")+Data.valueMap.get("bot");
         Data.setCloseFrame(true);
         for(int i =0; i<Data.betMap.size(); i++){
             Data.betMap.put(i,0);

@@ -109,19 +109,19 @@ public class Frame  extends JFrame implements KeyListener {
     }
 
     public void setValueToTextfields(int turn) {
-        for (int i = 0; i < field.getBlackjack().getPlayers().length; i++) {
-            if(Data.betMap.get(i) != null)
+
+        for (int i = 0; i < Data.numberPlayers; i++) {
+            if (Data.betMap.get(i) != null)
                 textfieldsWager[i].setText(String.valueOf(Data.betMap.get(i)));
             else
                 textfieldsWager[i].setText("0");
             textfieldsPoints[i].setText(String.valueOf(field.getBlackjack().getValue(field.getBlackjack().getPlayers()[i])));
-            if(i==turn) {
+            if (i == Data.getTurnOfPlayer()) {
                 textfieldsPoints[i].setBackground(Color.RED);
                 textfieldsWager[i].setBackground(Color.RED);
                 textfieldsPlayername[i].setBackground(Color.RED);
 
-            }
-            else {
+            } else {
                 textfieldsPoints[i].setBackground(Color.WHITE);
                 textfieldsWager[i].setBackground(Color.WHITE);
                 textfieldsPlayername[i].setBackground(Color.WHITE);
@@ -165,6 +165,7 @@ public class Frame  extends JFrame implements KeyListener {
                     } catch (CryptoException cryptoException) {
                         cryptoException.printStackTrace();
                     }
+                    setValueToTextfields(turn);
                 }
             }
         });
@@ -179,6 +180,7 @@ public class Frame  extends JFrame implements KeyListener {
                     } catch (CryptoException cryptoException) {
                         cryptoException.printStackTrace();
                     }
+                    setValueToTextfields(turn);
                 }
             }
         });
@@ -193,6 +195,7 @@ public class Frame  extends JFrame implements KeyListener {
                     } catch (CryptoException cryptoException) {
                         cryptoException.printStackTrace();
                     }
+                    setValueToTextfields(turn);
                 }
             }
         });
@@ -207,6 +210,7 @@ public class Frame  extends JFrame implements KeyListener {
                     } catch (CryptoException cryptoException) {
                         cryptoException.printStackTrace();
                     }
+                    setValueToTextfields(turn);
                 }
             }
         });

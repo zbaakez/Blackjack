@@ -39,6 +39,24 @@ public class Data {
         Data.gameRunning = gameRunning;
     }
 
+    public static int numberPlayers;
+
+    public static int getTurnOfPlayer() {
+        return turnOfPlayer;
+    }
+
+    public static void setTurnOfPlayer() {
+        if(turnOfPlayer+1==numberPlayers)
+            Data.turnOfPlayer = 0;
+        else
+            turnOfPlayer++;
+    }
+    public static void setTurnOfPlayerToZero() {
+        Data.turnOfPlayer = 0;
+    }
+
+    private static int turnOfPlayer=0;
+
     //boolean that is true if game is running
     static private boolean gameRunning = false;
 

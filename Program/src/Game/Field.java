@@ -54,26 +54,31 @@ public class Field extends Canvas {
 
     public void start(){
 
+
         thread = new Thread(()-> {
+            int x=0;
             boolean closer = false;
             while(true) {
+                x++;
                 if(Data.getCloseFrame() || closer) {
                     frame.dispose();
                     Data.setCloseFrame(false);
                     break;
                 }
+
                 BufferStrategy bs = this.getBufferStrategy();
                 if (bs == null) {
                     createBufferStrategy(3);
                     continue;
                 }
-                closer = Data.getCloseFrame();
+
                 Graphics g = bs.getDrawGraphics();
                 draw(g);
-                uiUpdate();
+
+
                 g.dispose();
                 bs.show();
-                closer = Data.getCloseFrame();
+
                 try {
                     closer = Data.getCloseFrame();
                     do {
@@ -83,11 +88,24 @@ public class Field extends Canvas {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                if(x<10)
+                    uiUpdate();
+
                 closer = Data.getCloseFrame();
             }
+
         });
+        frame.setVisible(true);
         thread.start();
         blackjack.start();
+    }
+
+    void bf(){
+        BufferStrategy bs = this.getBufferStrategy();;
+        if(bs == null) {
+            createBufferStrategy(3);
+            return;
+        }
     }
 
     public void draw(Graphics g){

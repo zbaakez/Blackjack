@@ -98,7 +98,12 @@ public class BlackJack {
             if(!players[turnPlayer].canSplit()){
                 return;
             }
+            Data.numberPlayers++;
             Player player = players[turnPlayer].split();
+            Spieler spieler = new Spieler(Data.spielerMap.get(turnPlayer).getSpielername(), Data.spielerMap.get(turnPlayer).getID(),Data.spielerMap.get(turnPlayer).getSpieleAnzahl(), Data.spielerMap.get(turnPlayer).getSiegeAnzahl(),Data.spielerMap.get(turnPlayer).getGeld());
+            Data.spielerMap.put(Data.spielerMap.size(),spieler);
+            Data.betMap.put(Data.betMap.size(), Data.betMap.get(turnPlayer));
+
             Player[] players1 = new Player[players.length+1];
             int foundTurnPlayer=0;
             for(int i=0;i<players.length;i++){
@@ -123,6 +128,7 @@ public class BlackJack {
         }
         do{
             turnPlayer+=1;
+            Data.setTurnOfPlayer();
             if(turnPlayer>=players.length) {
                 turnPlayer = 0;
             }
@@ -287,7 +293,21 @@ public class BlackJack {
             ii++;
         }
 
+    }
 
+    public void dealersTurn() throws IOException, CryptoException {
+
+        int maxPoints = Data.valueMap.get("maxPoints");
+        while (getValue(getDealer())<maxPoints-4){ // same as 21-4 == 17
+            dealer.addCard(deck.draw());
+        }
+        checkWinner();
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Platform.runLater(() -> {
             ViewEndscreen viewEndscreen = new ViewEndscreen();
             try {
@@ -296,15 +316,6 @@ public class BlackJack {
                 e.printStackTrace();
             }
         });
-
-    }
-
-    public void dealersTurn() throws IOException, CryptoException {
-        int maxPoints = Data.valueMap.get("maxPoints");
-        while (getValue(getDealer())<maxPoints-4){ // same as 21-4 == 17
-            dealer.addCard(deck.draw());
-        }
-        checkWinner();
 
     }
 
