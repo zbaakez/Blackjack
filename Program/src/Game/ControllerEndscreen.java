@@ -146,18 +146,21 @@ public class ControllerEndscreen {
         stage.close(); //Stage szene gets closed after a button is clicked
     }
     public void handleRestartBtn() throws Exception {
+        Data.setCloseFrame(true);
         for(int i = 0; i<Data.spielerMap.size(); i++){
             if(i>Data.valueMap.get("spieler")+Data.valueMap.get("bot")){
                 Data.spielerMap.remove(i);
             }
         }
         Data.numberPlayers=Data.valueMap.get("spieler")+Data.valueMap.get("bot");
-        Data.setCloseFrame(true);
+
         for(int i =0; i<Data.betMap.size(); i++){
             Data.betMap.put(i,0);
         }
         Stage stage = (Stage) btnExit.getScene().getWindow();
         stage.close(); //Stage szene gets closed after a button is clicked
+
+        Thread.sleep(200);
         Game.MainGUI.main();
 
     }
