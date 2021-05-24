@@ -95,9 +95,9 @@ public class Model {
      * @param siegeAnzahl as Integer
      * @param geld as Integer
      */
-    public void safePlayerDataToHashmap(String spielername, int ID, int spieleAnzahl, int siegeAnzahl, int geld) {
+    public void safePlayerDataToHashmap(String spielername, int ID, int spieleAnzahl, int siegeAnzahl, int geld, int turnSpieler) {
         Spieler spieler = new Spieler(spielername, ID, spieleAnzahl, siegeAnzahl, geld);
-        Data.spielerMap.put(Data.spielerMap.size(), spieler);
+        Data.spielerMap.put(turnSpieler-1, spieler);
     }
 
 }

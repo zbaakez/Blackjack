@@ -110,7 +110,7 @@ public class Frame extends JFrame implements KeyListener {
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         int width = (int)size.getWidth();
         int height = (int)size.getHeight();
-        textFieldMaxPoints.setBounds(field.scaleX((int) Math.round(width - (width*0.92))) , field.scaleY((int) Math.round(height - (height*0.90))), field.scaleX(200), field.scaleY(100));
+        textFieldMaxPoints.setBounds(field.scaleX((int) Math.round(width - (width*0.92))) , field.scaleY((int) Math.round(height - (height*0.90))), field.scaleX(200)+30, field.scaleY(100));
         textFieldMaxPoints.setText("MAX: " + String.valueOf(Data.valueMap.get("maxPoints")));
         textFieldMaxPoints.setFont(new Font("BODONI MT BLACK", Font.BOLD, 37));
         textFieldMaxPoints.setForeground(Color.BLACK);

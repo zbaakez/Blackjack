@@ -339,7 +339,8 @@ public class Controller {
                     decryptedFile.delete();
 
                     //now safe data of player to hashmap
-                    model.safePlayerDataToHashmap(usernameInput, rows, 0,0,1000);
+                    int spieler1 = Integer.parseInt(lblSpielerLogin.getText().replaceAll("\\D+", ""));
+                    model.safePlayerDataToHashmap(usernameInput, rows, 0,0,1000, spieler1);
                     //set worked to true, new user has registered correctly
                     worked=true;
 
@@ -410,7 +411,8 @@ public class Controller {
                     if (passwordInput.equals(values[1])) { //password is correct
                         stateLogin = 2; //user is logged in
                         //save data from csv (data in array) to hashmap
-                        model.safePlayerDataToHashmap(usernameInput, Integer.parseInt(values[2]), Integer.parseInt(values[3]), Integer.parseInt(values[4]), Integer.parseInt(values[5]));
+                        int spieler1 = Integer.parseInt(lblSpielerLogin.getText().replaceAll("\\D+", ""));
+                        model.safePlayerDataToHashmap(usernameInput, Integer.parseInt(values[2]), Integer.parseInt(values[3]), Integer.parseInt(values[4]), Integer.parseInt(values[5]), spieler1);
                         //user is logged in correctly, set worked to true
                         worked = true;
                     }
@@ -441,8 +443,9 @@ public class Controller {
             if(!decryptedFile.exists())
                 decryptedFile.delete();
 
+            int spieler1 = Integer.parseInt(lblSpielerLogin.getText().replaceAll("\\D+", ""));
             //Save guest to Hashmap with default data, guest 1 gets name guest1 with ID -1, guest 2 gets guest2 with ID-2
-            model.safePlayerDataToHashmap("guest"+Model.Data.guestAnzahl, (Model.Data.guestAnzahl)*(-1), 0,0,1000);
+            model.safePlayerDataToHashmap("guest"+Model.Data.guestAnzahl, (Model.Data.guestAnzahl)*(-1), 0,0,1000, spieler1);
             Model.Data.guestAnzahl++;
             //After everything is done -> next login or game start
             Stage stage = (Stage) btnLogin.getScene().getWindow();
