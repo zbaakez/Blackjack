@@ -117,6 +117,26 @@ public class Frame  extends JFrame implements KeyListener {
 
         try {
             for (int i = 0; i < Data.numberPlayers; i++) {
+                /*for(int x = 0; x<Data.numberPlayers;x++){
+                    if(textfieldsPlayername[i].getText().equals(textfieldsPlayername[x].getText()) && i!=x){
+                        textfieldsWager[x] = textfieldsWager[i];
+                        textfieldsPoints[i].setText(String.valueOf(field.getBlackjack().getValue(field.getBlackjack().getPlayers()[i])));
+                        if (i == Data.getTurnOfPlayer()) {
+                            textfieldsPoints[i].setBackground(Color.RED);
+                            textfieldsWager[i].setBackground(Color.RED);
+                            textfieldsPlayername[i].setBackground(Color.RED);
+
+                        } else {
+                            textfieldsPoints[i].setBackground(Color.WHITE);
+                            textfieldsWager[i].setBackground(Color.WHITE);
+                            textfieldsPlayername[i].setBackground(Color.WHITE);
+                        }
+                        i++;
+                        if(i==Data.numberPlayers)
+                            return;
+                    }
+                }*/
+
                 if (Data.betMap.get(i) != null && textfieldsWager[i] != null)
                     textfieldsWager[i].setText(String.valueOf(Data.betMap.get(i)));
                 else
