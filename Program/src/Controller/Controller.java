@@ -40,7 +40,7 @@ public class Controller {
         if(!Model.Data.getInit()) {
             if (!Model.Data.getInitInputValueMap()) {// set values of hashmap
                 Model.Data.valueMap.put("init", 1); //hashmap has been initialized
-                Model.Data.valueMap.put("sound", 0); //sound on
+                Model.Data.valueMap.put("sound", 1); //sound on
                 Model.Data.valueMap.put("spieler", 1); //spieleranzahl
                 Model.Data.valueMap.put("bot", 0); //botanzahl
                 Model.Data.valueMap.put("szene", 1); // 1 == Standard, 2 == Tirol, 3 == Strand, 4 == Normaler Tisch

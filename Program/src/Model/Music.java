@@ -30,6 +30,18 @@ public class Music {
      * Method that resumes the playing Music
      */
     public static void resumeMusic(){
+        File directory;
+        switch (Data.valueMap.get("szene")) {
+            case 2 -> directory = new File("resources/music/tirol");
+            case 3 -> directory = new File("resources/music/beach");
+            case 4 -> directory = new File("resources/music/universe");
+            default -> directory = new File("resources/music/casino"); //case 1, so directory is always initialized
+        }
+
+        if (directory.length()==0){
+            Data.valueMap.put("sound", 0); //sound off
+            return;
+        }
         audioPlayer.play();
     }
 
@@ -38,6 +50,20 @@ public class Music {
      * gets source for song/audio out of musicHandler() method
      */
     public static void playMusic() {
+
+        //switch through theme to get corresponding path
+        File directory;
+        switch (Data.valueMap.get("szene")) {
+            case 2 -> directory = new File("resources/music/tirol");
+            case 3 -> directory = new File("resources/music/beach");
+            case 4 -> directory = new File("resources/music/universe");
+            default -> directory = new File("resources/music/casino"); //case 1, so directory is always initialized
+        }
+
+        if (directory.length()==0){
+            Data.valueMap.put("sound", 0); //sound off
+            return;
+        }
 
         if(Data.valueMap.get("sound") == 1) {
             String audioPath = musicHandler();
@@ -71,13 +97,26 @@ public class Music {
             default -> directory = new File("resources/music/casino"); //case 1, so directory is always initialized
         }
 
+        if (directory.length()==0){
+            Data.valueMap.put("sound", 0); //sound off
+        }
+
         files=directory.listFiles(); // gets all files of directory
-        if(files != null) {
+        if(files == null){
+            Data.valueMap.put("sound", 0); //sound off
+            audioPlayer.stop();
+        }
+        else if(files != null) {
             while (true) { //shuffle through files (music)
-                File file = files[rand.nextInt(files.length)];
-                if(file.getName().endsWith(".mp3") && (!file.getName().equals(lastSong) || files.length==1)) {//viable file to play
-                    lastSong=file.getName(); // so the same song doesnt play twice
-                    return file.getPath();
+                try {
+                    File file = files[rand.nextInt(files.length)];
+                    if (file.getName().endsWith(".mp3") && (!file.getName().equals(lastSong) || files.length == 1)) {//viable file to play
+                        lastSong = file.getName(); // so the same song doesnt play twice
+                        return file.getPath();
+                    }
+                }
+                catch (Exception e){
+                    Data.valueMap.put("sound", 0); //sound off
                 }
             }
         }

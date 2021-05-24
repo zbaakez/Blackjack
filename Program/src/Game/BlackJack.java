@@ -121,6 +121,7 @@ public class BlackJack {
                 e.printStackTrace();
             }
             frame.setTextfields();
+            frame.setBetToTextfields(true);
             notStanding.add(player);
         }
 

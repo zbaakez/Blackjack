@@ -49,6 +49,8 @@ public class Frame  extends JFrame implements KeyListener {
         for(int i = chips.length-1; i>=0; i--){
             chips[i] = new Chips(Data.spielerMap.get(i).getSpielername(), i);
         }
+        while(Data.valueMap.get("openStages") == 2);
+        setBetToTextfields(false);
     }
 
     public void startGame(){
@@ -70,18 +72,22 @@ public class Frame  extends JFrame implements KeyListener {
     }
 
     public void setTextfields() {
-
+        if (Data.betMap.get(0) != null)
+            System.out.println(String.valueOf(Data.betMap.get(0)));
         try {
+            String[] names = new String[Data.numberPlayers];
             for (int i = 0; i < Data.numberPlayers; i++) {
+                names[i] = Data.spielerMap.get(field.getBlackjack().getPlayers()[i].getId()).getSpielername();
                 textfieldsPlayername[i] = new Label();
                 textfieldsPoints[i] = new Label();
                 textfieldsWager[i] = new Label();
                 if (!Data.spielerMap.containsKey(field.getBlackjack().getPlayers()[i].getId())) {
-                    Spieler spieler = new Spieler("bot" + String.valueOf(i - Data.valueMap.get("spieler") + 1), i, 0, 0, 9999999); // bot has unlimited money
+                    Spieler spieler = new Spieler("bot" + (i - Data.valueMap.get("spieler") + 1), i, 0, 0, 9999999); // bot has unlimited money
                     Data.spielerMap.put(i, spieler);
                 }
                 textfieldsPlayername[i].setText(Data.spielerMap.get(field.getBlackjack().getPlayers()[i].getId()).getSpielername());
-                textfieldsWager[i].setText("Einsatz!"); // put variable for input here
+                textfieldsWager[i].setText("Einsatz!");
+
             }
 
             for (int j = 0; j < field.getBlackjack().getPlayers().length; j++) {
@@ -111,36 +117,26 @@ public class Frame  extends JFrame implements KeyListener {
         return drawReady;
     }
 
+    public void setBetToTextfields(boolean split){
+        if(!split) {
+            for (int i = 0; i < textfieldsWager.length; i++) {
+                textfieldsWager[i].setText(String.valueOf(Data.betMap.get(i)));
+            }
+        }else{
+            for (int i = 0; i < textfieldsWager.length; i++) {
+                textfieldsWager[i].setText(String.valueOf(Data.betMap.get(i)));
+            }
+        }
+    }
+
+
     public void setValueToTextfields() {
         if(Data.numberPlayers > textfieldsWager.length)
             setTextfields();
 
         try {
             for (int i = 0; i < Data.numberPlayers; i++) {
-                /*for(int x = 0; x<Data.numberPlayers;x++){
-                    if(textfieldsPlayername[i].getText().equals(textfieldsPlayername[x].getText()) && i!=x){
-                        textfieldsWager[x] = textfieldsWager[i];
-                        textfieldsPoints[i].setText(String.valueOf(field.getBlackjack().getValue(field.getBlackjack().getPlayers()[i])));
-                        if (i == Data.getTurnOfPlayer()) {
-                            textfieldsPoints[i].setBackground(Color.RED);
-                            textfieldsWager[i].setBackground(Color.RED);
-                            textfieldsPlayername[i].setBackground(Color.RED);
 
-                        } else {
-                            textfieldsPoints[i].setBackground(Color.WHITE);
-                            textfieldsWager[i].setBackground(Color.WHITE);
-                            textfieldsPlayername[i].setBackground(Color.WHITE);
-                        }
-                        i++;
-                        if(i==Data.numberPlayers)
-                            return;
-                    }
-                }*/
-
-                if (Data.betMap.get(i) != null && textfieldsWager[i] != null)
-                    textfieldsWager[i].setText(String.valueOf(Data.betMap.get(i)));
-                else
-                    textfieldsWager[i].setText("0");
                 textfieldsPoints[i].setText(String.valueOf(field.getBlackjack().getValue(field.getBlackjack().getPlayers()[i])));
                 if (i == Data.getTurnOfPlayer()) {
                     textfieldsPoints[i].setBackground(Color.RED);
