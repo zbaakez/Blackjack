@@ -120,7 +120,7 @@ public class BlackJack {
             players=players1;
             frame.deleteTextfields();
             try {
-                Thread.sleep(100);
+                Thread.sleep(30);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
