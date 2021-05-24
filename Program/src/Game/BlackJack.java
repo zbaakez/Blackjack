@@ -56,11 +56,6 @@ public class BlackJack {
         dealer.resetHand();
         dealer.addCard(deck.draw());
 
-
-        players[0].resetHand();
-        players[0].addCard(new Card(0 , 0));
-        players[0].addCard(new Card(0 , 0));
-
     }
 
     public void action(Action action) throws IOException, CryptoException {
