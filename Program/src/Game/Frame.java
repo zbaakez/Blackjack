@@ -56,8 +56,6 @@ public class Frame extends JFrame implements KeyListener {
         for(int i = chips.length-1; i>=0; i--){
             chips[i] = new Chips(Data.spielerMap.get(i).getSpielername(), i, field.getSceneColor());
         }
-        while(Data.valueMap.get("openStages") == 2);
-        setBetToTextfields(false);
     }
 
 
@@ -82,53 +80,80 @@ public class Frame extends JFrame implements KeyListener {
      * tree labels per player are created and the text set depending on the players data
      */
     public void setTextfields() {
-        try {
-            String[] names = new String[Data.numberPlayers];
-            for (int i = 0; i < Data.numberPlayers; i++) {
-                names[i] = Data.spielerMap.get(field.getBlackjack().getPlayers()[i].getId()).getSpielername();
-                textfieldsPlayername[i] = new JLabel("", SwingConstants.CENTER);
-                textfieldsPoints[i] = new JLabel("", SwingConstants.CENTER);
-                textfieldsWager[i] = new JLabel("", SwingConstants.CENTER);
-                if (!Data.spielerMap.containsKey(field.getBlackjack().getPlayers()[i].getId())) {
-                    Spieler spieler = new Spieler("bot" + (i - Data.valueMap.get("spieler") + 1), i, 0, 0, 9999999); // bot has unlimited money
-                    Data.spielerMap.put(i, spieler);
-                }
-                textfieldsPlayername[i].setText(Data.spielerMap.get(field.getBlackjack().getPlayers()[i].getId()).getSpielername());
-                textfieldsWager[i].setText("Einsatz!");
 
+        for (int i = 0; i < field.getBlackjack().getPlayers().length; i++) {
+            textfieldsPlayername[i] = new JLabel("", SwingConstants.CENTER);
+            textfieldsPoints[i] = new JLabel("", SwingConstants.CENTER);
+            textfieldsWager[i] = new JLabel("", SwingConstants.CENTER);
+            if(!Data.spielerMap.containsKey(field.getBlackjack().getPlayers()[i].getId())){
+                Spieler spieler = new Spieler("bot"+ (i - Data.valueMap.get("spieler") + 1), i, 0, 0, 9999999); // bot has unlimited money
+                Data.spielerMap.put(i, spieler);
             }
+            textfieldsPlayername[i].setText(Data.spielerMap.get(field.getBlackjack().getPlayers()[i].getId()).getSpielername());
+            textfieldsWager[i].setText("Einsatz!"); // put variable for input here
+        }
 
-            for (int j = 0; j < field.getBlackjack().getPlayers().length; j++)
-            {
-                textfieldsPlayername[j].setBounds(field.scaleX(field.getXPos(j) + 10), field.scaleY(field.getYPos(j) - 120), field.scaleX(100), field.scaleY(30));
-                textfieldsPoints[j].setBounds(field.scaleX(field.getXPos(j) + 10), field.scaleY(field.getYPos(j) - 80), field.scaleX(100), field.scaleY(30));
-                textfieldsWager[j].setBounds(field.scaleX(field.getXPos(j) + 10), field.scaleY(field.getYPos(j) - 40), field.scaleX(100), field.scaleY(30));
-                setLabel(j);
+        for (int j = 0; j < field.getBlackjack().getPlayers().length; j++) {
+            textfieldsPlayername[j].setBounds(field.scaleX(field.getXPos(j) + 10), field.scaleY(field.getYPos(j) - 120), field.scaleX(100), field.scaleY(30));
+            textfieldsPoints[j].setBounds(field.scaleX(field.getXPos(j) + 10), field.scaleY(field.getYPos(j) - 80), field.scaleX(100), field.scaleY(30));
+            textfieldsWager[j].setBounds(field.scaleX(field.getXPos(j) + 10), field.scaleY(field.getYPos(j) - 40), field.scaleX(100), field.scaleY(30));
+            setLabel(j);
+        }
 
+        for (int o = 0; o < field.getBlackjack().getPlayers().length; o++) {
+            this.add(textfieldsPlayername[o]);
+            this.add(textfieldsPoints[o]);
+            this.add(textfieldsWager[o]);
+        }
 
-                for(int o = 0; o < field.getBlackjack().getPlayers().length; o++)
-                {
-                    this.add(textfieldsPlayername[o]);
-                    this.add(textfieldsPoints[o]);
-                    this.add(textfieldsWager[o]);
-                }
+        textFieldMaxPoints.setOpaque(true);
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = (int)size.getWidth();
+        int height = (int)size.getHeight();
+        textFieldMaxPoints.setBounds(field.scaleX((int) Math.round(width - (width*0.92))) , field.scaleY((int) Math.round(height - (height*0.90))), field.scaleX(200), field.scaleY(100));
+        textFieldMaxPoints.setText("MAX: " + String.valueOf(Data.valueMap.get("maxPoints")));
+        textFieldMaxPoints.setFont(new Font("BODONI MT BLACK", Font.BOLD, 37));
+        textFieldMaxPoints.setForeground(Color.BLACK);
+        textFieldMaxPoints.setBackground(field.getSceneColor());
+        textFieldMaxPoints.setBorder(new LineBorder(Color.BLACK, 2));
+        this.add(textFieldMaxPoints);
 
-                textFieldMaxPoints.setOpaque(true);
-                Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-                int width = (int) size.getWidth();
-                int height = (int) size.getHeight();
-                textFieldMaxPoints.setBounds(field.scaleX((int) Math.round(width - (width * 0.92))), field.scaleY((int) Math.round(height - (height * 0.90))), field.scaleX(200), field.scaleY(100));
-                textFieldMaxPoints.setText("MAX: " + String.valueOf(Data.valueMap.get("maxPoints")));
-                textFieldMaxPoints.setFont(new Font("BODONI MT BLACK", Font.BOLD, 37));
-                textFieldMaxPoints.setForeground(Color.BLACK);
-                textFieldMaxPoints.setBackground(field.getSceneColor());
-                textFieldMaxPoints.setBorder(new LineBorder(Color.BLACK, 2));
-                this.add(textFieldMaxPoints);
+        this.add(field);
+        drawReady=true;
+    }
 
-                this.add(field);
-                drawReady = true;
+    /**
+     * returns if draw is ready
+     * @return
+     */
+    public boolean isDrawReady() {
+        return drawReady;
+    }
+
+    /**
+     * the label of the bet is set to the players bet
+     * the labels turn red when its the players turn
+     * @param turn, indicates which players turn it is
+     */
+    public void setValueToTextfields(int turn) {
+        for (int i = 0; i < field.getBlackjack().getPlayers().length; i++) {
+            if(Data.betMap.get(i) != null)
+                textfieldsWager[i].setText(String.valueOf(Data.betMap.get(i)));
+            else
+                textfieldsWager[i].setText("0");
+            textfieldsPoints[i].setText(String.valueOf(field.getBlackjack().getValue(field.getBlackjack().getPlayers()[i])));
+            if(i==turn) {
+                textfieldsPoints[i].setBackground(field.getSceneColor().brighter().brighter());
+                textfieldsWager[i].setBackground(field.getSceneColor().brighter().brighter());
+                textfieldsPlayername[i].setBackground(field.getSceneColor().brighter().brighter());
             }
-        }catch (Exception e){ }
+            else {
+                textfieldsPoints[i].setBackground(field.getSceneColor());
+                textfieldsWager[i].setBackground(field.getSceneColor());
+                textfieldsPlayername[i].setBackground(field.getSceneColor());
+            }
+            setLabel(i);
+        }
     }
 
     private void setLabel(int index)
@@ -145,70 +170,6 @@ public class Frame extends JFrame implements KeyListener {
         textfieldsWager[index].setOpaque(true);
         textfieldsPoints[index].setOpaque(true);
         textfieldsPlayername[index].setOpaque(true);
-    }
-
-    /**
-     * returns if draw is ready
-     * @return
-     */
-    public boolean isDrawReady() {
-        return drawReady;
-    }
-
-    public void setBetToTextfields(boolean split){
-        if(!split) {
-            for (int i = 0; i < textfieldsWager.length; i++) {
-                if(Data.betMap.get(i) == null)
-                    textfieldsWager[i].setText(String.valueOf(0));
-                else
-                        textfieldsWager[i].setText(String.valueOf(Data.betMap.get(i)));
-
-            }
-        }else{
-            String[] names = new String[Data.numberPlayers];
-            for(int x=0;x<textfieldsWager.length; x++ ){
-                names[x]=textfieldsPlayername[x].getText();
-            }
-            /*for (int i = 0; i < textfieldsWager.length; i++) {
-                for(int x=0; x<textfieldsWager.length; x++){
-
-                }
-                textfieldsWager[i].setText(String.valueOf(Data.betMap.get(i)));
-            }*/
-        }
-    }
-
-    /**
-     * the label of the bet is set to the players bet
-     * the labels turn red when its the players turn
-     */
-    public void setValueToTextfields()
-    {
-        if(Data.numberPlayers > textfieldsWager.length)
-            setTextfields();
-        try
-        {
-
-            for(int i = 0; i < Data.numberPlayers; i++)
-            {
-                textfieldsPoints[i].setText(String.valueOf(field.getBlackjack().getValue(field.getBlackjack().getPlayers()[i])));
-                System.out.println(Data.getTurnOfPlayer() + " " + i);
-                if(i == Data.getTurnOfPlayer())
-                {
-                    textfieldsPoints[i].setBackground(field.getSceneColor().brighter().brighter());
-                    textfieldsWager[i].setBackground(field.getSceneColor().brighter().brighter());
-                    textfieldsPlayername[i].setBackground(field.getSceneColor().brighter().brighter());
-                }
-                else
-                {
-                    textfieldsPoints[i].setBackground(field.getSceneColor());
-                    textfieldsWager[i].setBackground(field.getSceneColor());
-                    textfieldsPlayername[i].setBackground(field.getSceneColor());
-                }
-                setLabel(i);
-            }
-        }
-        catch(Exception e) { }
     }
 
     /**

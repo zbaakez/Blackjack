@@ -70,7 +70,6 @@ public class Field extends Canvas {
             e.printStackTrace();
         }
         this.scene = scene;
-
         this.blackjack=new BlackJack(Data.valueMap.get("spieler"), Data.valueMap.get("bot"), frame);
     }
 
@@ -78,6 +77,7 @@ public class Field extends Canvas {
      * Thread that adds the components of the field and keeps drawing them
      */
     public void start(){
+
         thread = new Thread(()-> {
             boolean closer = false;
             while(true) {
@@ -86,36 +86,30 @@ public class Field extends Canvas {
                     Data.setCloseFrame(false);
                     break;
                 }
-                try {
-                    BufferStrategy bs = this.getBufferStrategy();
-                    if (bs == null) {
-                        createBufferStrategy(3);
-                        continue;
-                    }
-
-                    Graphics g = bs.getDrawGraphics();
-                    draw(g);
-
-
-                    g.dispose();
-                    bs.show();
-                    uiUpdate();
-                }catch (IllegalStateException e){
-
+                BufferStrategy bs = this.getBufferStrategy();
+                if (bs == null) {
+                    createBufferStrategy(3);
+                    continue;
                 }
+                closer = Data.getCloseFrame();
+                Graphics g = bs.getDrawGraphics();
+                draw(g);
+                uiUpdate();
+                g.dispose();
+                bs.show();
+                closer = Data.getCloseFrame();
                 try {
+                    closer = Data.getCloseFrame();
                     do {
                         Thread.sleep(10);
                     } while(!frame.isDrawReady());
+                    closer = Data.getCloseFrame();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
                 closer = Data.getCloseFrame();
             }
-
         });
-        frame.setVisible(true);
         thread.start();
         blackjack.start();
     }
@@ -150,7 +144,7 @@ public class Field extends Canvas {
      * updates the ui
      */
     public void uiUpdate(){
-        frame.setValueToTextfields();
+        frame.setValueToTextfields(blackjack.getTurnPlayer());
     }
 
     /**

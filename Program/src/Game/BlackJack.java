@@ -70,7 +70,6 @@ public class BlackJack {
         }
         dealer.resetHand();
         dealer.addCard(deck.draw());
-
         dealer.addCard(new Card(-1, -1));
 
         players[0].resetHand();
@@ -102,48 +101,33 @@ public class BlackJack {
         else if(action == Action.SPLIT)
             if(players[turnPlayer].canSplit() && Data.spielerMap.get(turnPlayer).getGeld() * 2 >= Data.betMap.get(turnPlayer))
             {
-                Data.numberPlayers++;
-
                 players[turnPlayer].addTimesSplit();
                 Player player = players[turnPlayer].split();
 
-                Spieler spieler = new Spieler(Data.spielerMap.get(turnPlayer).getSpielername(), Data.spielerMap.get(turnPlayer).getID(),Data.spielerMap.get(turnPlayer).getSpieleAnzahl(), Data.spielerMap.get(turnPlayer).getSiegeAnzahl(),Data.spielerMap.get(turnPlayer).getGeld());
+                /*Spieler spieler = new Spieler(Data.spielerMap.get(turnPlayer).getSpielername(), Data.spielerMap.get(turnPlayer).getID(),Data.spielerMap.get(turnPlayer).getSpieleAnzahl(), Data.spielerMap.get(turnPlayer).getSiegeAnzahl(),Data.spielerMap.get(turnPlayer).getGeld());
                 Data.spielerMap.put(Data.spielerMap.size(),spieler);
-                Data.betMap.put(Data.numberPlayers-1, Data.betMap.get(turnPlayer));
+                Data.betMap.put(Data.numberPlayers-1, Data.betMap.get(turnPlayer));*/
 
-                Spieler spieler1 = new Spieler(Data.spielerMap.get(turnPlayer).getSpielername(), Data.spielerMap.get(turnPlayer).getID(),Data.spielerMap.get(turnPlayer).getSpieleAnzahl(), Data.spielerMap.get(turnPlayer).getSiegeAnzahl(),Data.spielerMap.get(turnPlayer).getGeld()-Data.betMap.get(turnPlayer));
-                Data.spielerMap.put(turnPlayer, spieler1);
+                Player[] newPlayers = new Player[players.length + 1];
 
-                Player[] players1 = new Player[players.length+1];
-                int foundTurnPlayer=0;
-                for(int i=0;i<players.length;i++)
+                int foundTurnPlayer = 0;
+                for(int i = 0; i < players.length; i++)
                 {
-                    players1[i + foundTurnPlayer] = players[i];
+                    newPlayers[i + foundTurnPlayer] = players[i];
                     if(i == turnPlayer)
                     {
-                    players1[i + 1] = player;
-                    foundTurnPlayer = 1;
+                        newPlayers[i + 1] = player;
+                        foundTurnPlayer = 1;
                     }
                 }
-
-                players = players1;
+                players = newPlayers;
                 frame.deleteTextfields();
-                try {
-                    Thread.sleep(30);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 frame.setTextfields();
-                frame.setBetToTextfields(true);
                 notStanding.add(player);
-                }
-
+            }
 
         if(action == Action.STAND || (action == Action.DOUBLE_DOWN && Data.spielerMap.get(turnPlayer).getGeld() * 2 >= Data.betMap.get(turnPlayer)) || getValue(players[turnPlayer]) >= Data.valueMap.get("maxPoints"))
-        {
             turnPlayer++;
-            Data.setTurnOfPlayer();
-        }
 
         if(turnPlayer >= players.length)
         {

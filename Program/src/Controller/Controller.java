@@ -244,7 +244,7 @@ public class Controller {
         boolean worked = false;
 
         //username cant equal guest
-        if(usernameInput.contains("guest") || usernameInput.contains("bot")) {
+        if(usernameInput.equals("guest")) {
             if (evt.getSource().equals(btnRegistrieren)) {
                 btnRegistrieren.setStyle("-fx-background-color: red");
                 btnRegistrieren.setText("Name ungültig!");
@@ -339,8 +339,7 @@ public class Controller {
                     decryptedFile.delete();
 
                     //now safe data of player to hashmap
-                    int spieler1 = Integer.parseInt(lblSpielerLogin.getText().replaceAll("\\D+", ""));
-                    model.safePlayerDataToHashmap(usernameInput, rows, 0,0,1000, spieler1);
+                    model.safePlayerDataToHashmap(usernameInput, rows, 0,0,1000);
                     //set worked to true, new user has registered correctly
                     worked=true;
 
@@ -411,8 +410,7 @@ public class Controller {
                     if (passwordInput.equals(values[1])) { //password is correct
                         stateLogin = 2; //user is logged in
                         //save data from csv (data in array) to hashmap
-                        int spieler1 = Integer.parseInt(lblSpielerLogin.getText().replaceAll("\\D+", ""));
-                        model.safePlayerDataToHashmap(usernameInput, Integer.parseInt(values[2]), Integer.parseInt(values[3]), Integer.parseInt(values[4]), Integer.parseInt(values[5]), spieler1);
+                        model.safePlayerDataToHashmap(usernameInput, Integer.parseInt(values[2]), Integer.parseInt(values[3]), Integer.parseInt(values[4]), Integer.parseInt(values[5]));
                         //user is logged in correctly, set worked to true
                         worked = true;
                     }
@@ -442,10 +440,9 @@ public class Controller {
 
             if(!decryptedFile.exists())
                 decryptedFile.delete();
-            int spieler1 = Integer.parseInt(lblSpielerLogin.getText().replaceAll("\\D+", ""));
-            //Save guest to Hashmap with default data, guest 1 gets name guest1 with ID -1, guest 2 gets guest2 with ID-2
-            model.safePlayerDataToHashmap("guest"+Model.Data.guestAnzahl, (Model.Data.guestAnzahl)*(-1), 0,0,1000, spieler1);
 
+            //Save guest to Hashmap with default data, guest 1 gets name guest1 with ID -1, guest 2 gets guest2 with ID-2
+            model.safePlayerDataToHashmap("guest"+Model.Data.guestAnzahl, (Model.Data.guestAnzahl)*(-1), 0,0,1000);
             Model.Data.guestAnzahl++;
             //After everything is done -> next login or game start
             Stage stage = (Stage) btnLogin.getScene().getWindow();
@@ -464,6 +461,8 @@ public class Controller {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close(); //Stage szene gets closed after button is clicked
 	        if(Model.Data.valueMap.get("spieler") == spieler) { // all players logged in, game can be started
+	            //for(int i = 0; i< Data.spielerMap.size(); i++)
+                  //  System.out.println("h  " + Data.spielerMap.get(i).getSpielername());
                 model.startGameBtnClicked();
             }
         }
