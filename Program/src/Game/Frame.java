@@ -37,8 +37,6 @@ public class Frame extends JFrame implements KeyListener {
      * @throws IOException
      */
     public Frame() throws IOException {
-        //this.scene=scene;
-        //this.player=players;
         this.setLayout(null);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(true);
@@ -50,6 +48,7 @@ public class Frame extends JFrame implements KeyListener {
         field.start();
         field.addKeyListener(this);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Game/logosmallpng.png")));
         //now get the bet of all players!
         Chips[] chips = new Chips[Data.valueMap.get("spieler")];
         Data.valueMap.put("openStages", 2);

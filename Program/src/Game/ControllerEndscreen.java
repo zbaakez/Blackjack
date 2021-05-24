@@ -237,10 +237,8 @@ public class ControllerEndscreen {
                         //splitter[4] == number wins
                         //splitter[5] == money
                         sb2.delete(0, sb2.length());
-                        int moneyx = Data.spielerMap.get(l).getGeld();
-                        if (moneyx == 0) //you cant have 0 money
-                            moneyx = 1;
-                        sb2.append(splitter[0]).append("§").append(splitter[1]).append("§").append(splitter[2]).append("§").append(Data.spielerMap.get(l).getSpieleAnzahl()).append("§").append(Data.spielerMap.get(l).getSiegeAnzahl()).append("§").append(moneyx);
+
+                        sb2.append(splitter[0]).append("§").append(splitter[1]).append("§").append(splitter[2]).append("§").append(Data.spielerMap.get(l).getSpieleAnzahl()).append("§").append(Data.spielerMap.get(l).getSiegeAnzahl()).append("§").append(money);
                         line = sb2.toString();
                     } else
                         line = scanner.nextLine();

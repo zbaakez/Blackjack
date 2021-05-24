@@ -256,66 +256,16 @@ public class BlackJack {
             //add payout, win and number of games++ to csv and spielermap (only if players arent bots)
             if(Data.spielerMap.get(ii) != null && Data.betMap.get(ii) != null) {
                 // first to hashmap
-                int money = Data.spielerMap.get(ii).getGeld()+Data.payoutMap.get(ii);
+                int money;
+                if(ii!=0)
+                    money = Data.spielerMap.get(ii).getGeld()+Data.payoutMap.get(ii);
+                else
+                    money = Data.spielerMap.get(ii).getGeld();
+
                 if(money == 0)
                     money=1;
                 Spieler spieler = new Spieler(Data.spielerMap.get(ii).getSpielername(), Data.spielerMap.get(ii).getID(), Data.spielerMap.get(ii).getSpieleAnzahl()+1, Data.spielerMap.get(ii).getSiegeAnzahl()+win, money);
                 Data.spielerMap.put(ii, spieler);
-
-                // now save to csv
-
-                //password for encrypting and decrypting
-                String key = "iMtheEncrypter!1";
-                //Files that are needed
-                File encryptedFile = new File("resources/dataencrypted.csv");
-                File decryptedFile = new File("resources/datadecrypted.csv");
-                if(!encryptedFile.exists()){
-                   break; //error, someone deleted the encryptedFile
-                } else { //if file exists
-                    //decrypt file
-                    Model.CryptoUtils.decrypt(key, encryptedFile, decryptedFile); //decrypt file here
-                }
-                //now we have a decrypted file
-
-                Scanner scanner = new Scanner(decryptedFile);
-                String line;
-                StringBuilder sb = new StringBuilder();
-                StringBuilder sb2 = new StringBuilder();
-                int x = 0;
-                while(scanner.hasNextLine()){
-                    if(x == Data.spielerMap.get(ii).getID()){
-                        line = scanner.nextLine();
-                        //now change money, games and wins
-                        String[] splitter = line.split("§");
-                        //splitter[3] == number games
-                        //splitter[4] == number wins
-                        //splitter[5] == money
-                        sb2.delete(0,sb2.length());
-                        int moneyx = Data.spielerMap.get(ii).getGeld();
-                        if(moneyx==0) //you cant have 0 money
-                            moneyx=1;
-                        sb2.append(splitter[0]).append("§").append(splitter[1]).append("§").append(splitter[2]).append("§").append(Data.spielerMap.get(ii).getSpieleAnzahl()).append("§").append(Data.spielerMap.get(ii).getSiegeAnzahl()).append("§").append(moneyx);
-                        line=sb2.toString();
-                    }
-                    else
-                        line = scanner.nextLine();
-                    sb.append(line);
-                    if(scanner.hasNextLine())
-                        sb.append("\n");
-                    x++;
-                }
-
-                scanner.close();
-                FileWriter writer = new FileWriter(decryptedFile);
-                writer.write(sb.toString());
-                writer.close();
-
-                // now encrypt file again
-                Model.CryptoUtils.encrypt(key, decryptedFile, encryptedFile);
-                //delete decrypted file
-                decryptedFile.delete();
-
-                //data now saved
 
             }
             ii++;

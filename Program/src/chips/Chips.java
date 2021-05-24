@@ -64,7 +64,7 @@ public class Chips extends JFrame {
 
         panel.setLayout(null);
         setIconPaths();
-
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("chips/logosmallpng.png")));
         panel.setBackground(colorPanel);
 
         player=new JLabel(playername,SwingConstants.CENTER);
