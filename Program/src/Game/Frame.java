@@ -123,9 +123,16 @@ public class Frame  extends JFrame implements KeyListener {
                 textfieldsWager[i].setText(String.valueOf(Data.betMap.get(i)));
             }
         }else{
-            for (int i = 0; i < textfieldsWager.length; i++) {
-                textfieldsWager[i].setText(String.valueOf(Data.betMap.get(i)));
+            String[] names = new String[Data.numberPlayers];
+            for(int x=0;x<textfieldsWager.length; x++ ){
+                names[x]=textfieldsPlayername[x].getText();
             }
+            /*for (int i = 0; i < textfieldsWager.length; i++) {
+                for(int x=0; x<textfieldsWager.length; x++){
+
+                }
+                textfieldsWager[i].setText(String.valueOf(Data.betMap.get(i)));
+            }*/
         }
     }
 
