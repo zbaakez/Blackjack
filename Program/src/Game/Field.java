@@ -86,30 +86,36 @@ public class Field extends Canvas {
                     Data.setCloseFrame(false);
                     break;
                 }
-                BufferStrategy bs = this.getBufferStrategy();
-                if (bs == null) {
-                    createBufferStrategy(3);
-                    continue;
-                }
-                closer = Data.getCloseFrame();
-                Graphics g = bs.getDrawGraphics();
-                draw(g);
-                uiUpdate();
-                g.dispose();
-                bs.show();
-                closer = Data.getCloseFrame();
                 try {
-                    closer = Data.getCloseFrame();
+                    BufferStrategy bs = this.getBufferStrategy();
+                    if (bs == null) {
+                        createBufferStrategy(3);
+                        continue;
+                    }
+
+                    Graphics g = bs.getDrawGraphics();
+                    draw(g);
+
+
+                    g.dispose();
+                    bs.show();
+                    uiUpdate();
+                }catch (IllegalStateException e){
+
+                }
+                try {
                     do {
                         Thread.sleep(10);
                     } while(!frame.isDrawReady());
-                    closer = Data.getCloseFrame();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
                 closer = Data.getCloseFrame();
             }
+
         });
+        frame.setVisible(true);
         thread.start();
         blackjack.start();
     }

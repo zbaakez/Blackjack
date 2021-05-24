@@ -72,9 +72,6 @@ public class BlackJack {
         dealer.addCard(deck.draw());
         dealer.addCard(new Card(-1, -1));
 
-        players[0].resetHand();
-        players[0].addCard(new Card(0, 0));
-        players[0].addCard(new Card(0, 0));
     }
 
     /**
@@ -104,9 +101,14 @@ public class BlackJack {
                 players[turnPlayer].addTimesSplit();
                 Player player = players[turnPlayer].split();
 
-                /*Spieler spieler = new Spieler(Data.spielerMap.get(turnPlayer).getSpielername(), Data.spielerMap.get(turnPlayer).getID(),Data.spielerMap.get(turnPlayer).getSpieleAnzahl(), Data.spielerMap.get(turnPlayer).getSiegeAnzahl(),Data.spielerMap.get(turnPlayer).getGeld());
+                Spieler spieler = new Spieler(Data.spielerMap.get(turnPlayer).getSpielername(), Data.spielerMap.get(turnPlayer).getID(),Data.spielerMap.get(turnPlayer).getSpieleAnzahl(), Data.spielerMap.get(turnPlayer).getSiegeAnzahl(),Data.spielerMap.get(turnPlayer).getGeld());
                 Data.spielerMap.put(Data.spielerMap.size(),spieler);
-                Data.betMap.put(Data.numberPlayers-1, Data.betMap.get(turnPlayer));*/
+
+                Data.betMap.put(Data.numberPlayers-1, Data.betMap.get(turnPlayer));
+
+                //remove bet a second time
+                Spieler spieler1 = new Spieler(Data.spielerMap.get(turnPlayer).getSpielername(), Data.spielerMap.get(turnPlayer).getID(),Data.spielerMap.get(turnPlayer).getSpieleAnzahl(), Data.spielerMap.get(turnPlayer).getSiegeAnzahl(),Data.spielerMap.get(turnPlayer).getGeld()-Data.betMap.get(turnPlayer));
+                Data.spielerMap.put(turnPlayer, spieler1);
 
                 Player[] newPlayers = new Player[players.length + 1];
 
