@@ -205,7 +205,7 @@ public class ControllerEndscreen {
                 if (money == 0)
                     money = 1;
 
-                Spieler spieler = new Spieler(Data.spielerMap.get(l).getSpielername(), Data.spielerMap.get(l).getID(), Data.spielerMap.get(l).getSpieleAnzahl() + 1, Data.spielerMap.get(l).getSiegeAnzahl() + Data.winMap.get(l), money);
+                Spieler spieler = new Spieler(Data.spielerMap.get(l).getSpielername(), Data.spielerMap.get(l).getID(), Data.spielerMap.get(l).getSpieleAnzahl(), Data.spielerMap.get(l).getSiegeAnzahl(), money);
                 Data.spielerMap.put(l, spieler);
 
                 // now save to csv

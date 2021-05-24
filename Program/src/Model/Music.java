@@ -45,7 +45,7 @@ public class Music {
             Media hit = new Media(Paths.get(audioPath).toUri().toString());
 
             audioPlayer = new AudioClip(hit.getSource());
-            audioPlayer.setVolume(0.021);
+            audioPlayer.setVolume(0.21);
             audioPlayer.play();
         }
 
