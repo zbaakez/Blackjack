@@ -1,22 +1,17 @@
 package Game;
 
-import Game.BlackJack;
 import Model.CryptoException;
 import Model.Data;
 import Model.Spieler;
 import chips.Chips;
 import javafx.application.Platform;
-import org.w3c.dom.Text;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
-import java.util.HashMap;
 
 public class Frame extends JFrame implements KeyListener {
     int player;
@@ -191,8 +186,7 @@ public class Frame extends JFrame implements KeyListener {
         int height = (int)size.getHeight();
         hit.setBounds(field.scaleX((int) Math.round(width - (width*0.92))) , field.scaleY((int) Math.round(height - (height*0.65))), field.scaleX(200), field.scaleY(100));
         stand.setBounds(field.scaleX(hit.getX() + 300 ), field.scaleY((int) Math.round(height - (height*0.65))), field.scaleX(200), field.scaleY(100));
-
-        split.setBounds((int) (width*0.92-field.scaleX(200)), hit.getY(), field.scaleX(200), field.scaleY(100));
+        split.setBounds(width-hit.getX()- field.scaleX(200), hit.getY(), field.scaleX(200), field.scaleY(100));
         dble.setBounds((split.getX()-(stand.getX()-hit.getX())), hit.getY(), field.scaleX(200), field.scaleY(100));
 
         setJButtons(hit);
@@ -261,7 +255,7 @@ public class Frame extends JFrame implements KeyListener {
         bt.setForeground(Color.BLACK);
         bt.setBorder(new LineBorder(Color.BLACK, 2));
         bt.setFocusPainted(false);
-        bt.setFont(new Font("BODONI MT BLACK", Font.BOLD, 40));
+        bt.setFont(new Font("BODONI MT BLACK", Font.BOLD, 32));
         bt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 bt.setBackground(field.getSceneColor().brighter());
