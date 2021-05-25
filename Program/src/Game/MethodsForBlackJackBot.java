@@ -1,11 +1,13 @@
 package Game;
 
+import Model.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MethodsForBlackJackBot
 {
-    private int pointsToWin;
+    private int pointsToWin = Data.valueMap.get("maxPoints");
     private int maxValueToSplit;
 
     private int[] remainingCards;
@@ -33,24 +35,32 @@ public class MethodsForBlackJackBot
      */
     public BlackJack.Action makeMove(Card upCard, List<Card> hand, int timesSplit)
     {
-        if(hand.size()<3) {
-            if (checkIfSplit(hand) && timesSplit < this.maxValueToSplit)
-            {
-                System.out.println("split");
-                return BlackJack.Action.SPLIT;
+        if(hand.size()==2) {
+
+            if(pointsToWin<50) {
+                if (checkIfSplit(hand) && timesSplit < this.maxValueToSplit) {
+                    return BlackJack.Action.SPLIT;
+                } else if (checkIfDouble(upCard, hand))
+                    return BlackJack.Action.DOUBLE_DOWN;
+                else if (takeCardOrNot(this.remainingCards, calculateTotal(hand)))
+                    return BlackJack.Action.HIT;
+                else
+                    return BlackJack.Action.STAND;
+            }else{
+                if(hand.get(0).getValue() == hand.get(1).getValue() && timesSplit < this.maxValueToSplit)
+                    return BlackJack.Action.SPLIT;
+                else if (takeCardOrNot(this.remainingCards, calculateTotal(hand)))
+                    return BlackJack.Action.HIT;
+                else
+                    return BlackJack.Action.STAND;
             }
-            else if (checkIfDouble(upCard, hand))
-                return BlackJack.Action.DOUBLE_DOWN;
-            else if (takeCardOrNot(this.remainingCards, calculateTotal(hand)))
+        }
+        else {
+            if (takeCardOrNot(this.remainingCards, calculateTotal(hand)))
                 return BlackJack.Action.HIT;
             else
                 return BlackJack.Action.STAND;
         }
-        else
-        if(takeCardOrNot(this.remainingCards,calculateTotal(hand)))
-            return BlackJack.Action.HIT;
-        else
-            return BlackJack.Action.STAND;
     }
 
     /**
@@ -154,7 +164,7 @@ public class MethodsForBlackJackBot
      */
     private boolean takeCardOrNot(int[] remainingCards, int totalHand)
     {
-        if(totalHand > remainingCards.length)
+        if(totalHand > this.pointsToWin-11)
         {
             int border = this.pointsToWin - totalHand;
 
@@ -236,24 +246,31 @@ public class MethodsForBlackJackBot
      * @param hand, given hand
      * @return, total amount of the hand
      */
-    private int calculateTotal(List<Card> hand)
-    {
-        int totalAmount = 0, value;
-        boolean aceFlag = false;
+    public int calculateTotal(List<Card> hand){
+        int value=0;
+        for(Card card : hand){
+            if(Card.cardValueToInt(card.getValue())==12 ||Card.cardValueToInt(card.getValue())==11 ||Card.cardValueToInt(card.getValue())==10){
+                value+=10;
+            }
+            else if(Card.cardValueToInt(card.getValue())==0){
+                value+=0;
+            }
+            else{
+                value+=Card.cardValueToInt(card.getValue())+1;
+            }
 
-        for(Card card: hand)
-        {
-            value = Card.cardValueToInt(card.getValue())+1;
-
-            if(value > 10)
-                value = 10;
-            else if(value == 1)
-                aceFlag = true;
-            totalAmount += value;
         }
-        if(aceFlag && totalAmount + 10 <= 21)
-            return totalAmount + 10;
-        else
-            return totalAmount;
+        for(Card card : hand){
+            if(Card.cardValueToInt(card.getValue())==0){
+                if(value<11){
+                    value+=11;
+                }
+                else{
+                    value+=1;
+                }
+            }
+        }
+        return value;
     }
+
 }
