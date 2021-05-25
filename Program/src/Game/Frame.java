@@ -136,22 +136,25 @@ public class Frame extends JFrame implements KeyListener {
      */
     public void setValueToTextfields(int turn) {
         for (int i = 0; i < field.getBlackjack().getPlayers().length; i++) {
-            if(Data.betMap.get(i) != null)
-                textfieldsWager[i].setText(String.valueOf(Data.betMap.get(i)));
-            else
-                textfieldsWager[i].setText("0");
-            textfieldsPoints[i].setText(String.valueOf(field.getBlackjack().getValue(field.getBlackjack().getPlayers()[i])));
-            if(i==turn) {
-                textfieldsPoints[i].setBackground(field.getSceneColor().brighter().brighter());
-                textfieldsWager[i].setBackground(field.getSceneColor().brighter().brighter());
-                textfieldsPlayername[i].setBackground(field.getSceneColor().brighter().brighter());
+            try {
+                if (Data.betMap.get(i) != null)
+                    textfieldsWager[i].setText(String.valueOf(Data.betMap.get(i)));
+                else
+                    textfieldsWager[i].setText("0");
+                textfieldsPoints[i].setText(String.valueOf(field.getBlackjack().getValue(field.getBlackjack().getPlayers()[i])));
+                if (i == turn) {
+                    textfieldsPoints[i].setBackground(field.getSceneColor().brighter().brighter());
+                    textfieldsWager[i].setBackground(field.getSceneColor().brighter().brighter());
+                    textfieldsPlayername[i].setBackground(field.getSceneColor().brighter().brighter());
+                } else {
+                    textfieldsPoints[i].setBackground(field.getSceneColor());
+                    textfieldsWager[i].setBackground(field.getSceneColor());
+                    textfieldsPlayername[i].setBackground(field.getSceneColor());
+                }
+                setLabel(i);
+            } catch (Exception e) {
+
             }
-            else {
-                textfieldsPoints[i].setBackground(field.getSceneColor());
-                textfieldsWager[i].setBackground(field.getSceneColor());
-                textfieldsPlayername[i].setBackground(field.getSceneColor());
-            }
-            setLabel(i);
         }
     }
 
