@@ -83,12 +83,8 @@ public class MethodsForBlackJackBot
      */
     private double makeForNode(Node node)
     {
-        double value = 0;
         makeNodesForPlayer(node);
-        value = evaluationTree(node);
-        System.out.println(value);
-        //freeSpace(node);
-        return value;
+        return evaluationTree(node);
     }
 
     /**

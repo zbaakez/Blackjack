@@ -26,7 +26,6 @@ public class BlackJack {
     private Player dealer;
     private Deck deck = new Deck();
     private int turnPlayer=0;
-    private int bets;
     Frame frame;
 
 

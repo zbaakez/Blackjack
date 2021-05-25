@@ -191,8 +191,9 @@ public class Frame extends JFrame implements KeyListener {
         int height = (int)size.getHeight();
         hit.setBounds(field.scaleX((int) Math.round(width - (width*0.92))) , field.scaleY((int) Math.round(height - (height*0.65))), field.scaleX(200), field.scaleY(100));
         stand.setBounds(field.scaleX(hit.getX() + 300 ), field.scaleY((int) Math.round(height - (height*0.65))), field.scaleX(200), field.scaleY(100));
-        split.setBounds(field.scaleX((int) Math.round((width*0.92) - 200) ), field.scaleY((int) Math.round(height - (height*0.65))), field.scaleX(200), field.scaleY(100));
-        dble.setBounds(field.scaleX((int) Math.round((width*0.92) - 500)) , field.scaleY((int) Math.round(height - (height*0.65))), field.scaleX(200), field.scaleY(100));
+
+        split.setBounds((int) (width*0.92-field.scaleX(200)), hit.getY(), field.scaleX(200), field.scaleY(100));
+        dble.setBounds((split.getX()-(stand.getX()-hit.getX())), hit.getY(), field.scaleX(200), field.scaleY(100));
 
         setJButtons(hit);
         setJButtons(stand);

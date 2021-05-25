@@ -142,8 +142,7 @@ public class Field extends Canvas {
             count+=40;
         }
 
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        g.drawImage(cardSkin,scaleX((dimension.width - scaleX(103)) / 2), scaleY((dimension.height / 2 - scaleY(158))), scaleX(103), scaleY(158), null);
+        g.drawImage(cardSkin,(scaleX(originalWidth-103) / 2), scaleY((originalHeight-scaleY(400)) / 2), scaleX(103), scaleY(158), null);
     }
 
     /**
