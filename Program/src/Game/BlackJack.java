@@ -5,12 +5,9 @@ import Model.Data;
 import Model.Spieler;
 import javafx.application.Platform;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class BlackJack {
 
@@ -270,14 +267,18 @@ public class BlackJack {
             ii++;
         }
 
+
         /**
          * calls javaFX to show the endscreen with the game results
          */
         Platform.runLater(() -> {
             ViewEndscreen viewEndscreen = new ViewEndscreen();
             try {
+                Thread.sleep(1500);
                 viewEndscreen.openEndScreen();
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         });
