@@ -255,7 +255,7 @@ public class Frame extends JFrame implements KeyListener {
         bt.setForeground(Color.BLACK);
         bt.setBorder(new LineBorder(Color.BLACK, 2));
         bt.setFocusPainted(false);
-        bt.setFont(new Font("BODONI MT BLACK", Font.BOLD, 32));
+        bt.setFont(new Font("BODONI MT BLACK", Font.BOLD, 30));
         bt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 bt.setBackground(field.getSceneColor().brighter());
@@ -309,7 +309,19 @@ public class Frame extends JFrame implements KeyListener {
 
     }
     @Override
-    public void keyReleased(KeyEvent e) { }
+    public void keyReleased(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+        {
+            Platform.runLater(() -> {
+                ViewEscScreen viewEscScreen = new ViewEscScreen();
+                try {
+                    viewEscScreen.openEscScreen();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
+        }
+    }
     @Override
     public void keyPressed(KeyEvent e) { }
 
