@@ -85,10 +85,16 @@ public class BlackJack {
             players[turnPlayer].addCard(deck.draw());
         else if(action == Action.DOUBLE_DOWN)
         {
-            if(Data.spielerMap.get(turnPlayer).getGeld() * 2 >= Data.betMap.get(turnPlayer) && players[turnPlayer].getHand().size() == 2)
-            {
-                Data.betMap.put(turnPlayer, Data.betMap.get(turnPlayer)*2);
-                players[turnPlayer].addCard(deck.draw());
+            try {
+                if (Data.spielerMap.get(turnPlayer).getGeld() * 2 >= Data.betMap.get(turnPlayer) && players[turnPlayer].getHand().size() == 2) {
+                    Spieler spieler = Data.spielerMap.get(turnPlayer);
+                    spieler.setGeld(spieler.getGeld()- Data.betMap.get(turnPlayer));
+                    Data.spielerMap.put(turnPlayer, spieler);
+                    Data.betMap.put(turnPlayer, Data.betMap.get(turnPlayer) * 2);
+                    players[turnPlayer].addCard(deck.draw());
+                }
+            }catch (NullPointerException e){
+                System.out.println("ok");
             }
         }
         else if(action == Action.SPLIT)
@@ -274,7 +280,7 @@ public class BlackJack {
         Platform.runLater(() -> {
             ViewEndscreen viewEndscreen = new ViewEndscreen();
             try {
-                Thread.sleep(1500);
+                Thread.sleep(2000);
                 viewEndscreen.openEndScreen();
             } catch (IOException e) {
                 e.printStackTrace();
